@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="cs">
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>PIA</title>
+	</head>
+	<body>
+		<nav th:replace="fragments/headers :: nav"></nav>
+		<h1>New Contact</h1>
+		
+		<form th:action="@{/confirmContact}" method="post">
+			<div>
+				<label for="name">Name: </label><input type="text" name="name" id="name" />
+			</div>
+			<div>
+				<label for="residence">Residence: </label><input type="text" name="residence" id="residence" />
+			</div>
+			<div>
+				<label for="identificationNumber">Identification Number: </label><input type="text" name="identificationNumber" id="identificationNumber" />
+			</div>
+			<div>
+				<label for="taxIndentificationNumber">Tax Identification Number: </label><input type="text" name="taxIdentificationNumber" id="taxIdentificationNumber" />
+			</div>
+			<div>
+				<label for="phone">Phone: </label><input type="text" name="phone" id="phone" />
+			</div>
+			<div>
+				<label for="email">E-mail: </label><input type="text" name="email" id="email" />
+			</div>
+			<div>
+				<label for="bankAcc">Bank Account: </label><input type="text" name="bankAcc" id="bankAcc" />
+			</div>
+			<div>
+				<input type="submit" value="Confirm" />
+			</div>
+			
+		</form>
+		
+		<div th:text="${message}"></div>
+				
+	</body>
+</html>

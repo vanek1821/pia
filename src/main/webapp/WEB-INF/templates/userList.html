@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	lang="cs"
+>
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>Title</title>
+	</head>
+	<body>
+		<nav th:replace="fragments/headers :: nav"></nav>
+		
+		<h1>EditPage</h1>
+		
+		<th:block th:each="user : ${users}">
+					
+					<tr>
+						<td><a th:href="@{/userList/user?id={id}(id=${user.Id})}"><div th:text="${user.username}"></div></a></td>
+						<td><a th:href="@{/delete?id={id}(id=${user.Id})}"><i class="fa fa-cross"></i></a>
+					</tr>
+		</th:block>
+		
+		
+	</body>
+</html>

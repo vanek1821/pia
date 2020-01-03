@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	lang="cs"
+>
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>Title</title>
+	</head>
+	<body>
+		<nav th:replace="fragments/headers :: nav"></nav>
+		<div sec:authorize="hasAuthority('USER')">Text visible to user.</div>
+        <div sec:authorize="hasAuthority('ADMIN')">Text visible to admin.</div>
+        <div sec:authorize="isAuthenticated()">
+            Text visible only to authenticated users.
+        </div>
+        <div sec:authorize="hasAuthority('ADMIN')">
+	        <form th:action="@{/registration}" method="post">
+	        	<div>Users</div>
+	        	<input type="submit" value="Registration" />
+	        </form>
+
+			<form th:action="@{/userList}" method="get">
+				<input type="submit" value="EditUsers" />
+			</form>
+
+			<form th:action="@{/contact}" method="post">
+	        	<div>Contacts</div>
+	        	<input type="submit" value="New Contact" />
+	        </form>
+			<form th:action="@{/contactList}" method="post">
+	        	<input type="submit" value="Edit Contact" />
+	        </form>
+        
+         <h2>USERS</h2>
+	        <table>
+	        	<tr>
+					<th>Username</th>
+					<th>fullname</th>
+					<th>pidnum</th>
+					<th>adress</th>
+					<th>email</th>
+					<th>phone</th>
+					<th>bankacc</th>
+					<th>role</th>
+				</tr>
+				<th:block th:each="user : ${users}">
+					
+					<tr>
+						<td th:text="${user.username}">...</td>
+						<td th:text="${user.fullName}">...</td>
+						<td th:text="${user.personalIDNum}">...</td>
+						<td th:text="${user.adress}">...</td>
+						<td th:text="${user.email}">...</td>
+						<td th:text="${user.phone}">...</td>
+						<td th:text="${user.bankAcc}">...</td>
+						<td th:text="${user.role.code}">...</td>
+						
+					</tr>
+				</th:block>
+			</table>
+
+		<h2>CONTACTS</h2>
+
+			<table>
+	        	<tr>
+					<th>name</th>
+					<th>residence</th>
+					<th>identificationNum</th>
+					<th>taxIdNum</th>
+					<th>phone</th>
+					<th>email</th>
+					<th>bankAcc</th>
+				</tr>
+				<th:block th:each="contact : ${contacts}">
+					
+					<tr>
+						<td th:text="${contact.name}">...</td>
+						<td th:text="${contact.residence}">...</td>
+						<td th:text="${contact.identificationNumber}">...</td>
+						<td th:text="${contact.taxIdentificationNumber}">...</td>
+						<td th:text="${contact.phone}">...</td>
+						<td th:text="${contact.email}">...</td>
+						<td th:text="${contact.bankAcc}">...</td>
+						
+					</tr>
+				</th:block>
+			</table>
+		</div>
+	</body>
+</html>
+
+

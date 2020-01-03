@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	lang="cs"
+>
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>Title</title>
+	</head>
+	<body>
+	
+		<nav th:replace="fragments/headers :: nav"></nav>
+		<h1>EDIT USER <Label th:text="${user.username}"></Label> </h1>	
+		<form th:action="@{/confirmEdit?id={id}(id=${user.Id})}" method="post">
+			<div>
+				<label for="fullName">FullName: </label><input th:field="${user.fullName}" type="text" name="fullName" id="fullName" />
+			</div>
+			<div>
+				<label for="personalIDNum">PersonalIDNumber:  </label><input th:field="${user.personalIDNum}" type="text" name="personalIDNum" id="personalIDNum" />
+			</div>
+			<div>
+				<label for="adress">Adress: </label><input th:field="${user.adress}" type="text" name="adress" id="adress" />
+			</div>
+			<div>
+				<label for="email">E-mail: </label><input th:field="${user.email}" type="text" name="email" id="email" />
+			</div>
+			<div>
+				<label for="phone">PhoneNum: </label><input th:field="${user.phone}" type="text" name="phone" id="phone" />
+			</div>
+			<div>
+				<label for="bankAcc">BankAcc: </label><input th:field="${user.bankAcc}" type="text" name="bankAcc" id="bankAcc" />
+			</div>
+			<div>
+				 <select th:field="*{user.role.code}">
+              		  <option th:each="role : ${roles}"
+                        th:value="${role.code}"
+                        th:utext="${role.name}"/>
+           		 </select>
+			</div>
+			<div>
+				<input type="submit" value="Edit" />
+				<a th:href="@{/userList}">BACK</a>
+			</div>
+		</form>
+	</body>
+</html>
