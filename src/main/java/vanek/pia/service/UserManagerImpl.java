@@ -81,6 +81,7 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 			Role role = this.roleRepo.findByCode("ADMIN");
 			//user.getRoles().add(role);
 			user.setRole(role);
+			
 			this.userRepo.save(user);
 		}
 	}
@@ -145,7 +146,9 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 	@Override
 	public void addUser(String username, String password, String fullName, String personalIDNum, String adress,
 			String email, String phone, String bankAcc) {
-		// TODO Auto-generated method stub
+		String hashed = this.encoder.encode(password);
+		User user = new User(username, hashed, fullName, personalIDNum, adress, email, phone, bankAcc);
+		this.userRepo.save(user);
 		
 	}
 

@@ -24,13 +24,18 @@
 				<input type="submit" value="EditUsers" />
 			</form>
 
-			<form th:action="@{/contact}" method="post">
+			<form th:action="@{/newContact}" method="post">
 	        	<div>Contacts</div>
 	        	<input type="submit" value="New Contact" />
 	        </form>
 			<form th:action="@{/contactList}" method="post">
 	        	<input type="submit" value="Edit Contact" />
 	        </form>
+
+			<form th:action="@{/newInvoice}" method="post">
+				<div>Invoice</div>
+				<input type="submit" value="New Invoice">
+			</form> 
         
          <h2>USERS</h2>
 	        <table>
@@ -85,6 +90,39 @@
 						
 					</tr>
 				</th:block>
+			</table>
+
+			<h2>INVOICES</h2>
+
+			<table>
+	        	<tr>
+					<th>SerialNumber</th>
+					<th>dateExposure</th>
+					<th>dueDate</th>
+					<th>dateExecution</th>
+					<th>symbolVariable</th>
+					<th>symbolConstant</th>
+					<th>cancelled</th>
+					<th>supplier</th>
+					<th>customer</th>	
+
+				</tr>
+				<th:block th:each="invoice : ${invoices}">
+					
+					<tr>
+						<td th:text="${invoice.documentSerialNumber}">...</td>
+						<td th:text="${invoice.dateExposure}">...</td>
+						<td th:text="${invoice.dateDue}">...</td>
+						<td th:text="${invoice.dateExecution}">...</td>
+						<td th:text="${invoice.symbolVariable}">...</td>
+						<td th:text="${invoice.symbolConstant}">...</td>
+						<td th:text="${invoice.cancelled}">...</td>
+						<td th:text="${invoice.supplier.name}">...</td>
+						<td th:text="${invoice.customer.name}">...</td>
+						
+					</tr>
+				</th:block>
+
 			</table>
 		</div>
 	</body>

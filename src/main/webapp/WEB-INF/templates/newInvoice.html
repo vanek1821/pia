@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" lang="cs">
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>PIA</title>
+	</head>
+	<body>
+		<nav th:replace="fragments/headers :: nav"></nav>
+		<h1>New Invoice</h1>
+		<form th:action="@{/confirmInvoice}" method="post">
+		<div>
+			 <select th:field="*{invoice.supplier.name}">
+              <option th:each="contact : ${contacts}"
+                        th:value="${contact.name}"
+                        th:utext="${contact.name}"/>
+           		 </select>
+			</div>
+			<div>
+			<select th:field="*{invoice.customer.name}">
+              <option th:each="contact : ${contacts}"
+                        th:value="${contact.name}"
+                        th:utext="${contact.name}"/>
+           		 </select>
+			</div>
+			<div>
+				<label for="documentSerialNumber">Document Serial Number: </label><input type="text" name="documentSerialNumber" id="documentSerialNumber" />
+			</div>
+			<div>
+				<label for="dateExposure">Exposure Date: </label><input type="text" name="dateExposure" id="dateExposure" />
+			</div>
+			<div>
+				<label for="dateDue">Due Date: </label><input type="text" name="dateDue" id="dateDue" />
+			</div>
+			<div>
+				<label for="dateExecution">Execution Date: </label><input type="text" name="dateExecution" id="dateExecution" />
+			</div>
+			<div>
+				<label for="symbolVariable">Variable Symbol: </label><input type="text" name="symbolVariable" id="symbolVariable" />
+			</div>
+			<div>
+				<label for="symbolConstant">Constant Symbol: </label><input type="text" name="symbolConstant" id="symbolConstant" />
+			</div>
+			<div>
+				<input type="submit" value="Confirm" />
+			</div>
+			
+		</form>
+		
+		<div th:text="${message}"></div>		
+	</body>
+</html>

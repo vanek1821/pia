@@ -23,16 +23,16 @@ public class ContactController {
 		this.contactManager = contactManager;
 	}
 	
-	@PostMapping("/contact")
+	@PostMapping("/newContact")
 	public ModelAndView newContact() {
-		ModelAndView modelAndView = new ModelAndView("contact");
+		ModelAndView modelAndView = new ModelAndView("newContact");
 		
 		return modelAndView;
 	}
 	
 	@PostMapping("/confirmContact")
 	public ModelAndView confirmContact(@Valid @ModelAttribute("contact") Contact contactValues) {
-		ModelAndView modelAndView = new ModelAndView("contact");
+		ModelAndView modelAndView = new ModelAndView("newContact");
 		ModelMap modelMap = modelAndView.getModelMap();
 		this.contactManager.addContact(contactValues);
 		

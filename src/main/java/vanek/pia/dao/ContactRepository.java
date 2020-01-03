@@ -8,7 +8,7 @@ import vanek.pia.domain.Contact;
 @Repository
 public interface ContactRepository extends CrudRepository<Contact, Long> {
 
-	Object findByName(String name);
+	Contact findByName(String name);
 
 	Contact getById(Long Id);
 

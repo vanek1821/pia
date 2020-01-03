@@ -55,8 +55,6 @@ public class ContactManagerImpl implements ContactManager{
 
 	@Override
 	public void updateContact(Contact contact, @Valid Contact contactValues) {
-		System.out.println(contactValues.toString());
-		System.out.println(contact.toString());
 		contact.setName(contactValues.getName());
 		contact.setResidence(contactValues.getResidence());
 		contact.setIdentificationNumber(contactValues.getIdentificationNumber());
