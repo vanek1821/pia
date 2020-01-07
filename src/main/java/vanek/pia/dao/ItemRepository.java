@@ -8,13 +8,11 @@ import vanek.pia.domain.Item;
 import vanek.pia.domain.User;
 
 @Repository
-public interface InvoiceRepository extends CrudRepository<Invoice, Long> {
-
-	Invoice findByDocumentSerialNumber(String documentSerialNumber);
+public interface ItemRepository extends CrudRepository<Item, Long> {
 	
-	Invoice getById(Long Id);
-
+	Item getById(Long Id);
 	
+	Item findByName(String name);
 
 	
 

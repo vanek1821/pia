@@ -12,6 +12,7 @@ import javax.persistence.OneToMany;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Entity
 @Data
@@ -43,6 +44,7 @@ public class Invoice extends EntityParent {
 	private Contact customer;
 
 
+	//@ToString.Exclude
 	@OneToMany(mappedBy = "invoice")
 	private List<Item> items;
 

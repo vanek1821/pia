@@ -108,6 +108,9 @@ public class AppConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 		registry
 		.addResourceHandler("/webfonts/**")
 		.addResourceLocations("/webfonts/");
+		registry
+		.addResourceHandler("/JS/**")
+		.addResourceLocations("/JS/");
 	}
 
 }

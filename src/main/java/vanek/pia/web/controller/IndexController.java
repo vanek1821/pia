@@ -1,5 +1,9 @@
 package vanek.pia.web.controller;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,11 +28,11 @@ public class IndexController {
 	}
 
 	@GetMapping("/")
-	public ModelAndView index() {
+	public ModelAndView index() throws IOException {
 		ModelAndView modelAndView = new ModelAndView("index");
 		ModelMap modelMap = modelAndView.getModelMap();
 		for (Invoice invoice : invoiceManager.getInvoices()) {
-			invoice.toString();
+			System.out.println(invoice.toString());
 		}
 		modelMap.addAttribute("users", userManager.getUsers());
 		modelMap.addAttribute("contacts", contactManager.getContacts());

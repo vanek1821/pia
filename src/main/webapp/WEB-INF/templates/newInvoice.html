@@ -1,10 +1,13 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" lang="cs">
+	
 	<head th:replace="fragments/headers :: head(~{::title})">
+		
 		<title>PIA</title>
 	</head>
 	<body>
+		<script th:src="@{/JS/addingItems.js}"></script>
 		<nav th:replace="fragments/headers :: nav"></nav>
 		<h1>New Invoice</h1>
 		<form th:action="@{/confirmInvoice}" method="post">
@@ -40,6 +43,19 @@
 			<div>
 				<label for="symbolConstant">Constant Symbol: </label><input type="text" name="symbolConstant" id="symbolConstant" />
 			</div>
+			<br><br><br>
+			<table id="itemTable">
+				<tr>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+				</tr>
+				
+			</table>
+			<div>
+					<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="butto">Add Item</button>
+				</div>
+			<br><br>
 			<div>
 				<input type="submit" value="Confirm" />
 			</div>

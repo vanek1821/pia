@@ -49,7 +49,35 @@
 				<input type="submit" value="Confirm" />
 				<a th:href="@{/invoiceList}">BACK</a>
 			</div>
-			
+			<br><br><br>
+			<div th:text="${itemList}" ></div>
+			<th:block th:each="item : ${itemList}">
+				<div th:text="${item.name}" ></div>
+				<div th:text="${item.quantity}" ></div>
+				<div th:text="${item.price}" ></div>
+			</th:block>
+			<table id="itemTable" th:object="${itemList}">
+				<tr>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+				</tr>
+				
+				<th:block th:each="item : ${itemList}">
+				 	<tr>
+				 	
+					<!-- TODO:
+					 	<td><input th:field="${item.name}" type="text" name="name" id="name" /></td>
+						<td><input th:field="${item.quantity}" type="text" name="quantity" id="quantity" /></td>
+						<td><input th:field="${item.price}" type="text" name="price" id="price" /></td>
+					</tr>
+					 -->	 
+				</th:block>
+			</table>
+			<div>
+					<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="butto">Add Item</button>
+				</div>
+			<br><br>
 		</form>
 		
 		<div th:text="${message}"></div>

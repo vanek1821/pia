@@ -29,7 +29,13 @@ public class Item extends EntityParent{
 		this.setName(name);
 		this.setQuantity(quantity);
 		this.setPrice(price);
-		this.setFullPrice(price*quantity);
+		this.setFullPrice((Float)price*quantity);
 	}
+	
+	@Override
+	public String toString() {
+		return "Item: " + this.name + " " + this.quantity + " " 
+				 + this.price + " " +  this.fullPrice + " " + this.invoice.getDocumentSerialNumber();
+		}
 	
 }

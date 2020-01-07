@@ -124,8 +124,20 @@
 						<td th:text="${invoice.customer.name}">...</td>
 						
 					</tr>
+					
+				 	<th:block th:each="item : ${invoice.items}">
+				 	<tr>
+						<td th:text="${item.name}">...</td>
+						 <td th:text="${item.quantity}">...</td>
+						<td th:text="${item.price}">...</td>
+						<td th:text="${item.fullPrice}">...</td>
+					</tr>	
+					</th:block>
+					 
+					
+					
 				</th:block>
-
+				
 			</table>
 		</div>
 	</body>

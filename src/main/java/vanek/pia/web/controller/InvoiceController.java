@@ -1,5 +1,7 @@
 package vanek.pia.web.controller;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import vanek.pia.domain.Contact;
 import vanek.pia.domain.Invoice;
+import vanek.pia.domain.Item;
 import vanek.pia.domain.User;
 import vanek.pia.service.ContactManager;
 import vanek.pia.service.InvoiceManager;
@@ -42,7 +45,7 @@ public class InvoiceController {
 		ModelAndView mav = new ModelAndView("newInvoice");
 		ModelMap modelMap = mav.getModelMap();
 		this.invoiceManager.addInvoice(invoiceValues);
-		modelMap.addAttribute("message", invoiceValues.toString());
+		modelMap.addAttribute("message", "Invoice succesfully added");
 		
 		return mav;
 	}
@@ -78,8 +81,10 @@ public class InvoiceController {
 			
 		}
 		else {
+			List<Item> itemList = invoice.getItems();
 			modelMap.addAttribute("contacts", contactManager.getContacts());
 			modelMap.addAttribute("invoice", invoice);
+			modelMap.addAttribute("itemList",itemList);
 		}
 		
 		return mav;

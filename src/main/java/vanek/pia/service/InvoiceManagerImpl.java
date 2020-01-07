@@ -8,14 +8,17 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionMessage.ItemsBuilder;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
 import vanek.pia.dao.ContactRepository;
 import vanek.pia.dao.InvoiceRepository;
+import vanek.pia.dao.ItemRepository;
 import vanek.pia.dao.UserRepository;
 import vanek.pia.domain.Contact;
 import vanek.pia.domain.Invoice;
+import vanek.pia.domain.Item;
 import vanek.pia.domain.User;
 
 @Service
@@ -26,6 +29,8 @@ public class InvoiceManagerImpl implements InvoiceManager {
 	private InvoiceRepository invoiceRepo;
 	@Autowired
 	private ContactRepository contactRepo;
+	@Autowired
+	private ItemRepository itemRepo;
 	
 	
 	@Override
@@ -37,6 +42,10 @@ public class InvoiceManagerImpl implements InvoiceManager {
 
 	@Override
 	public void addInvoice(@Valid Invoice invoiceValues) {
+		if(invoiceValues==null) {
+			log.error("invoiceValues are null");
+			return;
+		}
 		if (this.invoiceRepo.findByDocumentSerialNumber(invoiceValues.getDocumentSerialNumber()) != null) {
 			throw new IllegalArgumentException("Document already exists!");
 		}
@@ -46,7 +55,20 @@ public class InvoiceManagerImpl implements InvoiceManager {
 		invoice.setSupplier(supplier);
 		Contact customer = this.contactRepo.findByName(invoiceValues.getCustomer().getName());
 		invoice.setCustomer(customer);
-	
+		
+		this.invoiceRepo.save(invoice);
+		
+		if(invoiceValues.getItems()==null) {
+			log.info("invoiceValues.getItems() are null");
+			return;
+		}
+		
+		for (Item item : invoiceValues.getItems()) {
+			Item tmpItem = new Item(item.getName(), item.getQuantity(), item.getPrice());
+			tmpItem.setInvoice(invoice);
+			itemRepo.save(tmpItem);
+		}
+		
 		this.invoiceRepo.save(invoice);
 		
 	}
