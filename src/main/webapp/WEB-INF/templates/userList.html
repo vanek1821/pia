@@ -12,6 +12,8 @@
 		
 		<h1>EditPage</h1>
 		
+		<h2 style=color:red><div th:text="${message}"></div></h2>
+		
 		<th:block th:each="user : ${users}">
 					
 					<tr>
@@ -19,6 +21,7 @@
 						<td><a th:href="@{/delete?id={id}(id=${user.Id})}"><i class="fa fa-cross"></i></a>
 					</tr>
 		</th:block>
+		
 		
 		
 	</body>

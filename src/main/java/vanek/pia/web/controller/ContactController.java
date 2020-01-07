@@ -25,71 +25,80 @@ public class ContactController {
 	
 	@PostMapping("/newContact")
 	public ModelAndView newContact() {
-		ModelAndView modelAndView = new ModelAndView("newContact");
+		ModelAndView mav = new ModelAndView("newContact");
 		
-		return modelAndView;
+		return mav;
 	}
 	
 	@PostMapping("/confirmContact")
 	public ModelAndView confirmContact(@Valid @ModelAttribute("contact") Contact contactValues) {
-		ModelAndView modelAndView = new ModelAndView("newContact");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("newContact");
+		ModelMap modelMap = mav.getModelMap();
 		this.contactManager.addContact(contactValues);
 		
 		modelMap.addAttribute("message", "New Contact Confirmed Successfull");
 		
-		return modelAndView;
+		return mav;
 	}
 	
 	@PostMapping("/editContact")
 	public ModelAndView editContact() {
-		ModelAndView modelAndView = new ModelAndView("editContact");
+		ModelAndView mav = new ModelAndView("editContact");
 		
-		return modelAndView;
+		return mav;
 	}
 	
 	
 	@PostMapping("/confirmEditContact")
 	public ModelAndView confirmEditContact(@RequestParam("id") Long id, @Valid @ModelAttribute("contact") Contact contactValues) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/contactList");
-		ModelMap modelMap = modelAndView.getModelMap();
-		
+		ModelAndView mav = new ModelAndView("redirect:/contactList");
+		ModelMap modelMap = mav.getModelMap();
 		Contact contact = contactManager.getById(id);
 		contactManager.updateContact(contact, contactValues);
-		return modelAndView;
+		return mav;
 	}
 
 	@PostMapping("/contactList")
 	public ModelAndView userEdit_() {
-		ModelAndView modelAndView = new ModelAndView("contactList");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("contactList");
+		ModelMap modelMap = mav.getModelMap();
 		modelMap.addAttribute("contacts", contactManager.getContacts());
 
-		return modelAndView;
+		return mav;
 	}
 	
 	@GetMapping("/contactList/contact")
 	public ModelAndView editUser(@RequestParam("id") Long id) {
 		Contact contact = contactManager.getById(id);
-		ModelAndView modelAndView = new ModelAndView("editContact");
-		ModelMap modelMap = modelAndView.getModelMap();
-		modelMap.addAttribute("contact", contact);
-		return modelAndView;
+		ModelAndView mav = new ModelAndView("editContact");
+		ModelMap modelMap = mav.getModelMap();
+		if(contact == null) {
+			mav = new ModelAndView("contactList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Contact Not Found");
+			modelMap.addAttribute("contacts", contactManager.getContacts());
+			
+		}
+		else {
+			modelMap.addAttribute("contact", contact);
+		}
+		
+		return mav;
 	}
 	@GetMapping("/contactList")
 	public ModelAndView contactList_() {
-		ModelAndView modelAndView = new ModelAndView("contactList");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("contactList");
+		ModelMap modelMap = mav.getModelMap();
 		modelMap.addAttribute("contacts", contactManager.getContacts());
 
-		return modelAndView;
+		return mav;
 	}
 	@GetMapping("/deleteContact")
 	public ModelAndView deleteContact(@RequestParam("id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/contactList");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("redirect:/contactList");
+		ModelMap modelMap = mav.getModelMap();
 		contactManager.deleteContact(id);
-		return modelAndView;
+		return mav;
 	}
 	
 	

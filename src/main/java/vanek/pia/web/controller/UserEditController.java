@@ -32,42 +32,57 @@ private RoleManager roleManager;
 	
 	@GetMapping("/userList")
 	public ModelAndView userEdit_() {
-		ModelAndView modelAndView = new ModelAndView("userList");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("userList");
+		ModelMap modelMap = mav.getModelMap();
 		modelMap.addAttribute("users", userManager.getUsers());
 
-		return modelAndView;
+		return mav;
 	}
 	
 	
 	@GetMapping("/userList/user")
 	public ModelAndView editUser(@RequestParam("id") Long id) {
 		User user = userManager.getById(id);
-		ModelAndView modelAndView = new ModelAndView("editUser");
-		ModelMap modelMap = modelAndView.getModelMap();
-		modelMap.addAttribute("user", user);
-		modelMap.addAttribute("roles", roleManager.getRoles());
+		ModelAndView mav = new ModelAndView("editUser");
+		ModelMap modelMap = mav.getModelMap();
+		if (user == null) {
+			mav = new ModelAndView("userList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "User Not Found");
+			modelMap.addAttribute("users", userManager.getUsers());
+		}
+		else {
+			modelMap.addAttribute("user", user);
+			modelMap.addAttribute("roles", roleManager.getRoles());
+		}
 		
-		return modelAndView;
+		
+		return mav;
 		
 	}
 	
+	/*@PostMapping("/userList/error")
+	public ModelAndView userListError() {
+		ModelAndView mav = new ModelAndView("userList");
+		return mav;
+	}*/
+	
 	@PostMapping("/confirmEdit")
 	public ModelAndView confirmEdit(@RequestParam("id") Long id, @Valid @ModelAttribute("user") User userValues) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/userList");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("redirect:/userList");
+		ModelMap modelMap = mav.getModelMap();
 		
 		User user = userManager.getById(id);
 		userManager.updateUser(user, userValues);
-		return modelAndView;
+		return mav;
 	}
 	
 	@GetMapping("/delete")
 	public ModelAndView deleteUser(@RequestParam("id") Long id) {
-		ModelAndView modelAndView = new ModelAndView("redirect:/userList");
-		ModelMap modelMap = modelAndView.getModelMap();
+		ModelAndView mav = new ModelAndView("redirect:/userList");
+		ModelMap modelMap = mav.getModelMap();
 		userManager.deleteUser(id);
-		return modelAndView;
+		return mav;
 	}
 
 }

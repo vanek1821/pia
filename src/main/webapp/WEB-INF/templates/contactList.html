@@ -12,6 +12,8 @@
 		
 		<h1>Contact List</h1>
 		
+		<h2 style=color:red><div th:text="${message}"></div></h2>
+		
 		<th:block th:each="contact : ${contacts}">			
 					<tr>
 						<td><a th:href="@{/contactList/contact?id={id}(id=${contact.Id})}"><div th:text="${contact.name}"></div></a></td>
