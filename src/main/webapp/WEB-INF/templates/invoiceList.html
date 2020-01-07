@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	lang="cs"
+>
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>Title</title>
+	</head>
+	<body>
+		<nav th:replace="fragments/headers :: nav"></nav>
+		
+		<h1>Invoice List</h1>
+		
+		<h2 style=color:red><div th:text="${message}"></div></h2>
+		
+		<th:block th:each="invoice : ${invoices}">
+					
+					<tr>
+						<td><a th:href="@{/invoiceList/invoice?id={id}(id=${invoice.Id})}"><div th:text="${invoice.documentSerialNumber}"></div></a></td>
+					</tr>
+		</th:block>
+		
+		
+		
+	</body>
+</html>

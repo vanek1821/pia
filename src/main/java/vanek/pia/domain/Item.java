@@ -31,5 +31,5 @@ public class Item extends EntityParent{
 		this.setPrice(price);
 		this.setFullPrice(price*quantity);
 	}
-
+	
 }

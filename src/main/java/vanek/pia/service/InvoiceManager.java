@@ -14,4 +14,6 @@ public interface InvoiceManager {
 
 	List<Invoice> getInvoices();
 
+	void updateInvoice(Invoice invoice, @Valid Invoice invoiceValues);
+
 }

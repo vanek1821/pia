@@ -26,8 +26,12 @@ private RoleManager roleManager;
 	}
 	
 	@PostMapping("/userList")
-	public String userEdit() {
-		return "userList";
+	public ModelAndView userEdit() {
+		ModelAndView mav = new ModelAndView("userList");
+		ModelMap modelMap = mav.getModelMap();
+		modelMap.addAttribute("users", userManager.getUsers());
+
+		return mav;
 	}
 	
 	@GetMapping("/userList")
@@ -60,14 +64,8 @@ private RoleManager roleManager;
 		return mav;
 		
 	}
-	
-	/*@PostMapping("/userList/error")
-	public ModelAndView userListError() {
-		ModelAndView mav = new ModelAndView("userList");
-		return mav;
-	}*/
-	
-	@PostMapping("/confirmEdit")
+		
+	@PostMapping("/confirmEditUser")
 	public ModelAndView confirmEdit(@RequestParam("id") Long id, @Valid @ModelAttribute("user") User userValues) {
 		ModelAndView mav = new ModelAndView("redirect:/userList");
 		ModelMap modelMap = mav.getModelMap();
