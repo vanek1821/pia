@@ -15,7 +15,7 @@ function addRow() {
     var cellDelete = row.insertCell(3);
     var buttonDelete = document.createElement('button');
     buttonDelete.type = "button";
-    buttonDelete.innerText = "Delete";
+    buttonDelete.innerText = "delete";
     buttonDelete.onclick = (function(buttonDelete) {return function() {deleteRow(buttonDelete);}})(buttonDelete);
     cellDelete.appendChild(buttonDelete);
 }

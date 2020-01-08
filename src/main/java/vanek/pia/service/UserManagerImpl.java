@@ -54,9 +54,9 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 
 	@Override
 	//public void addUser(String username, String password, String fullName, String personalIDNum, String adress, String email, String phone, String bankAcc) {
-	public void addUser(@Valid User userValues) {
+	public boolean addUser(@Valid User userValues) {
 		if (this.userRepo.findByUsername(userValues.getUsername()) != null) {
-			throw new IllegalArgumentException("User already exists!");
+			return false;
 		}
 
 		String hashed = this.encoder.encode(userValues.getPassword());
@@ -66,6 +66,7 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 		//user.getRoles().add(role);
 		user.setRole(role);
 		this.userRepo.save(user);
+		return true;
 	}
 
 	@EventListener(classes = {

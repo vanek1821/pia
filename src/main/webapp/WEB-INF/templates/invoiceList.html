@@ -9,19 +9,19 @@
 	</head>
 	<body>
 		<nav th:replace="fragments/headers :: nav"></nav>
-		
-		<h1>Invoice List</h1>
-		
-		<h2 style=color:red><div th:text="${message}"></div></h2>
-		
-		<th:block th:each="invoice : ${invoices}">
-					
-					<tr>
-						<td><a th:href="@{/invoiceList/invoice?id={id}(id=${invoice.Id})}"><div th:text="${invoice.documentSerialNumber}"></div></a></td>
+		<div class="content">
+			<h1>Invoice List</h1>
+			
+			<h2 style=color:red><div th:text="${message}"></div></h2>
+			<table>
+				<th:block th:each="invoice : ${invoices}">
+					<tr class="list-row">
+						<td><span class="item-name" th:text="${invoice.documentSerialNumber}"></span></td>
+						<td><a class="item-control-edit" th:href="@{/invoiceList/invoice?id={id}(id=${invoice.Id})}"><i class="fa fa-edit">Edit</i></a></td>
 					</tr>
-		</th:block>
-		
-		
+				</th:block>
+			</table>
+		</div>
 		
 	</body>
 </html>

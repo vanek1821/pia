@@ -10,7 +10,7 @@ public interface ContactManager{
 	
 	List<Contact> getContacts();
 
-	void addContact(@Valid Contact contactValues);
+	boolean addContact(@Valid Contact contactValues);
 
 	Contact getById(Long id);
 

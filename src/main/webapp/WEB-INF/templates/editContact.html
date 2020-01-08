@@ -6,36 +6,46 @@
 	</head>
 	<body>
 		<nav th:replace="fragments/headers :: nav"></nav>
+		<div class="content">
 		<h1>Edit Contact</h1>
 		
 		<form th:action="@{/confirmEditContact?id={id}(id=${contact.Id})}" method="post">
-			<div>
-				<label for="name">Name: </label><input th:field="${contact.name}" type="text" name="name" id="name" />
-			</div>
-			<div>
-				<label for="residence">Residence: </label><input th:field="${contact.residence}" type="text" name="residence" id="residence" />
-			</div>
-			<div>
-				<label for="identificationNumber">Identification Number: </label><input th:field="${contact.identificationNumber}" type="text" name="identificationNumber" id="identificationNumber" />
-			</div>
-			<div>
-				<label for="taxIndentificationNumber">Tax Identification Number: </label><input th:field="${contact.taxIdentificationNumber}" type="text" name="taxIdentificationNumber" id="taxIdentificationNumber" />
-			</div>
-			<div>
-				<label for="phone">Phone: </label><input th:field="${contact.phone}" type="text" name="phone" id="phone" />
-			</div>
-			<div>
-				<label for="email">E-mail: </label><input th:field="${contact.email}" type="text" name="email" id="email" />
-			</div>
-			<div>
-				<label for="bankAcc">Bank Account: </label><input th:field="${contact.bankAcc}" type="text" name="bankAcc" id="bankAcc" />
-			</div>
-			<div>
+		<ul class="form-style-1">
+			<li>
+				<label for="name">Name: </label>
+				<input th:field="${contact.name}" type="text" name="name" class="field-long" />
+			</li>
+			<li>
+				<label for="residence">Residence: </label>
+				<input th:field="${contact.residence}" type="text" name="residence" class="field-long" />
+			</li>
+			<li>
+				<label for="identificationNumber">Identification Number: </label>
+				<input th:field="${contact.identificationNumber}" type="text" name="identificationNumber" class="field-long" />
+			</li>
+			<li>
+				<label for="taxIndentificationNumber">Tax Identification Number: </label>
+				<input th:field="${contact.taxIdentificationNumber}" type="text" name="taxIdentificationNumber" class="field-long" />
+			</li>
+			<li>
+				<label for="phone">Phone: </label>
+				<input th:field="${contact.phone}" type="text" name="phone" class="field-long" />
+			</li>
+			<li>
+				<label for="email">E-mail: </label>
+				<input th:field="${contact.email}" type="text" name="email" class="field-long" />
+			</li>
+			<li>
+				<label for="bankAcc">Bank Account: </label>
+				<input th:field="${contact.bankAcc}" type="text" name="bankAcc" class="field-long" />
+			</li>
+			<br>
+			<li>
 				<input type="submit" value="Confirm" />
-				<a th:href="@{/contactList}">BACK</a>
-			</div>
-			
+			</li>
+		</ul>
 		</form>
-				
+	</div>	
 	</body>
 </html>
+

@@ -30,15 +30,27 @@ public class ContactController {
 		return mav;
 	}
 	
+	@GetMapping("/newContact")
+	public ModelAndView newContact_() {
+		ModelAndView mav = new ModelAndView("newContact");
+		
+		return mav;
+	}
+	
 	@PostMapping("/confirmContact")
 	public ModelAndView confirmContact(@Valid @ModelAttribute("contact") Contact contactValues) {
 		ModelAndView mav = new ModelAndView("newContact");
 		ModelMap modelMap = mav.getModelMap();
-		this.contactManager.addContact(contactValues);
-		
-		modelMap.addAttribute("message", "New Contact Confirmed Successfull");
-		
-		return mav;
+		if(this.contactManager.addContact(contactValues)) {
+			modelMap.addAttribute("class", "success");
+			modelMap.addAttribute("message", "New Contact Successfull");
+			return mav;
+		}
+		else {
+			modelMap.addAttribute("class", "error");
+			modelMap.addAttribute("message", "ERROR: contact already exists");
+			return mav;
+		}
 	}
 	
 	@PostMapping("/editContact")

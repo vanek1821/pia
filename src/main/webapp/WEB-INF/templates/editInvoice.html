@@ -10,44 +10,51 @@
 	<body>
 		<script th:src="@{/JS/addingItems.js}"></script>
 		<nav th:replace="fragments/headers :: nav"></nav>
+		<div class="content">
 		<h1>EDIT INVOICE <Label th:text="${invoice.documentSerialNumber}"></Label> </h1>
 		
 			<form th:action="@{/confirmEditInvoice?id={id}(id=${invoice.Id})}" method="post">
-			<div>
-				<label for="documentSerialNumber">Document Serial Number: </label><input th:field="${invoice.documentSerialNumber}" type="text" name="documentSerialNumber" id="documentSerialNumber" />
-			</div>
-			<div>
-				<label for="dateExposure">Exposure Date: </label><input th:field="${invoice.dateExposure}" type="text" name="dateExposure" id="dateExposure" />
-			</div>
-			<div>
-				<label for="dateExecution">Execution Date: </label><input th:field="${invoice.dateExecution}" type="text" name="dateExposure" id="dateExposure" />
-			</div>
-			<div>
-				<label for="symbolVariable">Variable Symbol: </label><input th:field="${invoice.symbolVariable}" type="text" name="symbolVariable" id="symbolVariable" />
-			</div>
-			<div>
-				<label for="symbolConstant">Constant Symbol: </label><input th:field="${invoice.symbolConstant}" type="text" name="symbolConstant" id="symbolConstant" />
-			</div>
+			<ul class="form-style-1">
+			<li>
+				<label for="documentSerialNumber">Document Serial Number</label>
+				<input th:field="${invoice.documentSerialNumber}" type="text" name="documentSerialNumber" class="field-long" />
+			</li>
+			<li>
+				<label for="dateExposure">Exposure Date: </label>
+				<input th:field="${invoice.dateExposure}" type="text" name="dateExposure" class="field-long" />
+			</li>
+			<li>
+				<label for="dateExecution">Execution Date: </label>
+				<input th:field="${invoice.dateExecution}" type="text" name="dateExposure" class="field-long" />
+			</li>
+			<li>
+				<label for="symbolVariable">Variable Symbol: </label>
+				<input th:field="${invoice.symbolVariable}" type="text" name="symbolVariable" class="field-long" />
+			</li>
+			<li>
+				<label for="symbolConstant">Constant Symbol: </label>
+				<input th:field="${invoice.symbolConstant}" type="text" name="symbolConstant" class="field-long" />
+			</li>
 			
-			<div>
+			<li>
 				<label for="supplier">Supplier:</label>
-				<select th:field="*{invoice.supplier.name}">
+				<select th:field="*{invoice.supplier.name}" class="field-select">
             		<option th:each="contact : ${contacts}"
                         th:value="${contact.name}"
                         th:utext="${contact.name}"/>
            		 </select>
-			</div>
-			<div>
+			</li>
+			<li>
 			<label for="customer">Customer:</label>
-			<select th:field="*{invoice.customer.name}">
+			<select th:field="*{invoice.customer.name}" class="field-select">
               <option th:each="contact : ${contacts}"
                         th:value="${contact.name}"
                         th:utext="${contact.name}"/>
            		 </select>
-			</div>
+			</li>
 
 			
-			<h3>Items:</h3>
+			<label>Items</label>
 
 			<table id="itemTable" th:object="${itemList}">
 				<tr>
@@ -69,17 +76,18 @@
 					 	 
 				</th:block>
 			</table>
-			<div>
-					<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="butto">Add Item</button>
-				</div>
+			<li>
+				<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="butto">Add Item</button>
+			</li>
 			<br><br>
-			<div>
+			<li>
 				<input type="submit" value="Confirm" />
 				<a th:href="@{/invoiceList}">BACK</a>
-			</div>
+			</li>
+			</ul>
 		</form>
 		
 		<div th:text="${message}"></div>
-			
+		</div>
 	</body>
 </html>

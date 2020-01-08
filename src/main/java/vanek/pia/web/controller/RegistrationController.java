@@ -35,8 +35,12 @@ public class RegistrationController {
 	}
 	
 	@GetMapping("/registration")
-	public String registration_() {
-		return "registration";
+	public ModelAndView registration_() {
+		ModelAndView modelAndView = new ModelAndView("registration");
+		ModelMap modelMap = modelAndView.getModelMap();
+		modelMap.addAttribute("roles", roleManager.getRoles());
+		modelMap.addAttribute("user", new User());
+		return modelAndView;
 	}
 	
 	@PostMapping("/register")
@@ -44,13 +48,16 @@ public class RegistrationController {
 		ModelAndView modelAndView = new ModelAndView("registration");
 		ModelMap modelMap = modelAndView.getModelMap();
 		//this.userManager.addUser(userValues.getUsername(), userValues.getPassword(), userValues.getFullName(), userValues.getPersonalIDNum(), userValues.getAdress(), userValues.getEmail(), userValues.getPhone(), userValues.getBankAcc());
-		this.userManager.addUser(userValues);
-		modelMap.addAttribute("message", "Registration Successfull");
-		//modelMap.addAttribute("users", userManager.getUsers());
-
-		return modelAndView;
-		//return new ModelAndView("/registration");
-		
+		if (this.userManager.addUser(userValues)){
+			modelMap.addAttribute("class", "success");
+			modelMap.addAttribute("message", "Registration Successfull");
+			return modelAndView;
+		}
+		else {
+			modelMap.addAttribute("class", "error");
+			modelMap.addAttribute("message", "ERROR: user already exists");
+			return modelAndView;
+		}
 	}
 
 }

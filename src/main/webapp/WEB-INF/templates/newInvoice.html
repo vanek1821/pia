@@ -9,8 +9,77 @@
 	<body>
 		<script th:src="@{/JS/addingItems.js}"></script>
 		<nav th:replace="fragments/headers :: nav"></nav>
+		<div class="content">
 		<h1>New Invoice</h1>
 		<form th:action="@{/confirmInvoice}" method="post">
+		<ul class="form-style-1">
+			<li>
+				<label>Supplier </label>
+				<select th:field="*{invoice.supplier.name}" class="field-select">
+             		<option th:each="contact : ${contacts}"
+                        th:value="${contact.name}"
+                        th:utext="${contact.name}"/>
+           		</select>
+			</li>
+			<li>
+				<label>Customer</label>
+				<select th:field="*{invoice.customer.name}" class="field-select">
+             		<option th:each="contact : ${contacts}"
+                        th:value="${contact.name}"
+                        th:utext="${contact.name}"/>
+           		 </select>
+			</li>
+			<li>
+				<label for="documentSerialNumber">Document Serial Number </label>
+				<input type="text" name="documentSerialNumber" class="field-long" />
+			</li>
+			<li>
+				<label for="dateExposure">Exposure Date </label>
+				<input type="text" name="dateExposure" class="field-long" />
+			</li>
+			<li>
+				<label for="dateDue">Due Date: </label>
+				<input type="text" name="dateDue" class="field-long" />
+			</li>
+			<li>
+				<label for="dateExecution">Execution Date: </label>
+				<input type="text" name="dateExecution" class="field-long" />
+			</li>
+			<li>
+				<label for="symbolVariable">Variable Symbol: </label>
+				<input type="text" name="symbolVariable" class="field-long" />
+			</li>
+			<li>
+				<label for="symbolConstant">Constant Symbol: </label>
+				<input type="text" name="symbolConstant" class="field-long" />
+			</li>
+			<br><br><br>
+			<lable>Items</lable>
+			<table id="itemTable">
+				<tr>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+				</tr>
+			</table>
+			<li>
+				<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="button-add-item"><i class="fa fa-plus"></i></button>
+			</li>
+			<br><br>
+			<li>
+				<input type="submit" value="Confirm" />
+			</li>
+			</ul>
+		</form>
+		
+		<div th:class="${class}" th:text="${message}"></div>
+		
+		</div>		
+	</body>
+</html>
+
+<!-- 
+<form th:action="@{/confirmInvoice}" method="post">
 		<div>
 			 <select th:field="*{invoice.supplier.name}">
               <option th:each="contact : ${contacts}"
@@ -58,9 +127,4 @@
 			<div>
 				<input type="submit" value="Confirm" />
 			</div>
-			
-		</form>
-		
-		<div th:text="${message}"></div>		
-	</body>
-</html>
+ -->

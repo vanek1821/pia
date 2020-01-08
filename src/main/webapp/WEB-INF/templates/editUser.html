@@ -10,9 +10,56 @@
 	<body>
 	
 		<nav th:replace="fragments/headers :: nav"></nav>
-		<h1>EDIT USER <Label th:text="${user.username}"></Label> </h1>	
+		<div class="content">
+		 
+		<h1>Edit User <Label th:text="${user.username}"></Label> </h1>	
 		<form th:action="@{/confirmEditUser?id={id}(id=${user.Id})}" method="post">
-			<div>
+			<ul class="form-style-1">
+			<li>
+				<label>Full Name <span class="required">*</span></label>
+				<input type="text" th:field="${user.fullName}" name="fullName" class="field-long" />
+			</li>
+			<li>
+				<label>Personal ID Number</label>
+				<input type="text" th:field="${user.personalIDNum}" name="personalIDNum" class="field-long" />
+			</li>
+			<li>
+				<label>Address</label>
+				<input type="text" th:field="${user.adress}" name="adress" class="field-long" />
+			</li>
+			<li>
+				<label>E-mail<span class="required">*</span></label>
+				<input type="email" th:field="${user.email}" name="email" class="field-long" />
+			</li>
+			<li>
+				<label >Phone Number </label>
+				<input type="text" th:field="${user.phone}" name="phone" class="field-long" />
+			</li>
+			<li>
+				<label>Bank Account </label>
+				<input type="text" th:field="${user.bankAcc}" name="bankAcc" class="field-long" />
+			</li>
+			<li>
+		        <label>Role</label>
+		        <select th:field="*{user.role.code}" class="field-select">
+               		<option th:each="role : ${roles}"
+                        th:value="${role.code}"
+                        th:utext="${role.name}"
+                        />
+            	</select>
+		    </li>
+		    <br>
+		    <li>
+				<input type="submit" value="Edit" />
+			</li>
+		</ul>
+		</form>
+		</div>
+	</body>
+</html>
+
+<!-- 
+<div>
 				<label for="fullName">FullName: </label><input th:field="${user.fullName}" type="text" name="fullName" id="fullName" />
 			</div>
 			<div>
@@ -41,6 +88,4 @@
 				<input type="submit" value="Edit" />
 				<a th:href="@{/userList}">BACK</a>
 			</div>
-		</form>
-	</body>
-</html>
+ -->

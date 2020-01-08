@@ -9,27 +9,66 @@
 		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}">
 		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/all.min.css}">
 	</head>
+
+	
 	<body>
 		<nav th:fragment="nav">
-			<ul>
-				<li><h1>PIA!</h1></li>
-			</ul>
-			<ul>
-				<li sec:authorize="isAuthenticated()" th:fragment="nav">
-					Přihlášený uživatel: <span sec:authentication="name"></span>
-				</li>
-				<li>
-					<a th:href="@{/}"><i class="fa fa-home"></i></a>
-				</li>
-				<li>
-					<a th:href="@{/login}"><i class="fa fa-users-cog"></i></a>
-        		</li>
-				<li>
-					<a th:href="@{/logout}"><i class="fa fa-power-off"></i></a>
-        		</li>
-			</ul>
-		</nav>
-		
-		<p>Hello <span th:text="${#authentication.name}"></span></p>
+		<div class="topnav" th:fragment="nav">
+		  <a class="active" th:href="@{/}">Home</a>
+		  <div class="dropdown">
+			    <button class="dropbtn">Users 
+			      <i class="fa fa-caret-down"></i>
+			    </button>
+			    <div class="dropdown-content">
+				      <a th:href="@{/userList}">User List</a>
+				      <a th:href="@{/registration}">New User</a>
+			    </div>
+		  </div> 
+		  <div class="dropdown">
+			    <button class="dropbtn">Contacts 
+			      <i class="fa fa-caret-down"></i>
+			    </button>
+			    <div class="dropdown-content">
+			      <a th:href="@{/contactList}">Contact List</a>
+			      <a th:href="@{/newContact}">New Contact</a>
+			    </div>
+		  </div> 
+		  <div class="dropdown">
+			    <button class="dropbtn">Invoices 
+			      <i class="fa fa-caret-down"></i>
+			    </button>
+			    <div class="dropdown-content">
+			      <a th:href="@{/invoiceList}">Invoice List</a> 
+			      <a th:href="@{/newInvoice}">New Invoice</a>
+			    </div>
+		  </div> 
+
+		  <div class="topnav-right">
+		  <span class="logged-user" sec:authentication="name"></span>
+		    <a th:href="@{/logout}">Login</a>
+		    <a th:href="@{/logout}">Logout</a>
+		  </div>
+		</div>
+	</nav>
 	</body>
 </html>
+
+<!-- 
+
+<div class="dropdown">
+    <button class="dropbtn">Dropdown 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+    </div>
+  </div> 
+
+ 		<a th:href="@{/userList}">Users</a>
+		  <a th:href="@{/contactList}">Contacts</a>
+		  <a th:href="@{/invoiceList}">Invoices</a> 
+		  
+ -->
+  

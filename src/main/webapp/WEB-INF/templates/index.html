@@ -7,8 +7,15 @@
 	<head th:replace="fragments/headers :: head(~{::title})">
 		<title>Title</title>
 	</head>
-	<body>
 		<nav th:replace="fragments/headers :: nav"></nav>
+		
+		<div class="content">
+		
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Welcome!</h1>
+			<br>
+			<p>For browsing this site, please login.</p>
+		</div>
 		<div sec:authorize="hasAuthority('USER')">Text visible to user.</div>
         <div sec:authorize="hasAuthority('ADMIN')">Text visible to admin.</div>
         <div sec:authorize="isAuthenticated()">
@@ -139,6 +146,7 @@
 				</th:block>
 				
 			</table>
+		</div>
 		</div>
 	</body>
 </html>

@@ -20,6 +20,6 @@ public interface UserManager {
 
 	void deleteUser(Long id);
 
-	void addUser(@Valid User userValues);
+	boolean addUser(@Valid User userValues);
 
 }

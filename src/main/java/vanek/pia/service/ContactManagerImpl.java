@@ -37,12 +37,13 @@ public class ContactManagerImpl implements ContactManager{
 
 
 	@Override
-	public void addContact(@Valid Contact contactValues) {
+	public boolean addContact(@Valid Contact contactValues) {
 		if (this.contactRepo.findByName(contactValues.getName()) != null) {
-			throw new IllegalArgumentException("Contact already exists!");
+			return false;
 		}
 		Contact contact = new Contact(contactValues.getName(), contactValues.getResidence(), contactValues.getIdentificationNumber(), contactValues.getTaxIdentificationNumber(), contactValues.getPhone(), contactValues.getEmail(), contactValues.getBankAcc());
 		this.contactRepo.save(contact);
+		return true;
 	}
 
 

@@ -40,6 +40,15 @@ public class InvoiceController {
 		
 		return mav;
 	}
+	@GetMapping("/newInvoice")
+	public ModelAndView newInvoce_() {
+		ModelAndView mav = new ModelAndView("newInvoice");
+		ModelMap modelMap = mav.getModelMap();
+		modelMap.addAttribute("contacts", this.contactManager.getContacts());
+		modelMap.addAttribute("invoice", new Invoice());
+		
+		return mav;
+	}
 	
 	@PostMapping("/confirmInvoice")
 	public ModelAndView confirmInvoice(@Valid @ModelAttribute("invoice") Invoice invoiceValues) {

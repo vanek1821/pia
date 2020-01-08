@@ -9,17 +9,21 @@
 	</head>
 	<body>
 		<nav th:replace="fragments/headers :: nav"></nav>
-		
-		<h1>Contact List</h1>
-		
-		<h2 style=color:red><div th:text="${message}"></div></h2>
-		
-		<th:block th:each="contact : ${contacts}">			
-					<tr>
-						<td><a th:href="@{/contactList/contact?id={id}(id=${contact.Id})}"><div th:text="${contact.name}"></div></a></td>
-						<td><a th:href="@{/deleteContact?id={id}(id=${contact.Id})}"><i class="fa fa-cross"></i></a>
+		<div class="content">
+			
+			<h1>Contact List</h1>
+			
+			<h2 style=color:red><div th:text="${message}"></div></h2>
+			
+			<table>
+				<th:block th:each="contact : ${contacts}">			
+					<tr class="list-row">
+						<td><span class="item-name" th:text="${contact.name}"></span></td>
+						<td><a class="item-control-edit" th:href="@{/contactList/contact?id={id}(id=${contact.Id})}"><i class="fa fa-edit">Edit</i></a></td>
+						<td><a class="item-control-delete" th:href="@{/deleteContact?id={id}(id=${contact.Id})}"><i class="fa fa-trash-alt">Delete</i></a>
 					</tr>
-		</th:block>
-		
+				</th:block>
+			</table>
+		</div>
 	</body>
 </html>
