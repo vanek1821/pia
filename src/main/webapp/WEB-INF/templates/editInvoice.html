@@ -8,7 +8,7 @@
 		<title>Title</title>
 	</head>
 	<body>
-	
+		<script th:src="@{/JS/addingItems.js}"></script>
 		<nav th:replace="fragments/headers :: nav"></nav>
 		<h1>EDIT INVOICE <Label th:text="${invoice.documentSerialNumber}"></Label> </h1>
 		
@@ -45,17 +45,10 @@
                         th:utext="${contact.name}"/>
            		 </select>
 			</div>
-			<div>
-				<input type="submit" value="Confirm" />
-				<a th:href="@{/invoiceList}">BACK</a>
-			</div>
-			<br><br><br>
-			<div th:text="${itemList}" ></div>
-			<th:block th:each="item : ${itemList}">
-				<div th:text="${item.name}" ></div>
-				<div th:text="${item.quantity}" ></div>
-				<div th:text="${item.price}" ></div>
-			</th:block>
+
+			
+			<h3>Items:</h3>
+
 			<table id="itemTable" th:object="${itemList}">
 				<tr>
 					<th>Name</th>
@@ -63,21 +56,27 @@
 					<th>Price</th>
 				</tr>
 				
-				<th:block th:each="item : ${itemList}">
-				 	<tr>
-				 	
-					<!-- TODO:
-					 	<td><input th:field="${item.name}" type="text" name="name" id="name" /></td>
-						<td><input th:field="${item.quantity}" type="text" name="quantity" id="quantity" /></td>
-						<td><input th:field="${item.price}" type="text" name="price" id="price" /></td>
+				<th:block th:each="item , stat : *{items}">
+				
+				 
+					<tr>
+					 	<td><input th:field="*{items[__${stat.index}__].name}" type="text" name="name" id="name" /></td>
+						<td><input th:field="*{items[__${stat.index}__].quantity}" type="text" name="quantity" id="quantity" /></td>
+						<td><input th:field="*{items[__${stat.index}__].price}" type="text" name="price" id="price" /></td>
+						<td><input type="button" value="Delete" onclick="deleteRow(this)"></td>
 					</tr>
-					 -->	 
+
+					 	 
 				</th:block>
 			</table>
 			<div>
 					<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="butto">Add Item</button>
 				</div>
 			<br><br>
+			<div>
+				<input type="submit" value="Confirm" />
+				<a th:href="@{/invoiceList}">BACK</a>
+			</div>
 		</form>
 		
 		<div th:text="${message}"></div>

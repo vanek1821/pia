@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 import vanek.pia.domain.Contact;
 import vanek.pia.domain.Invoice;
 import vanek.pia.domain.Item;
+import vanek.pia.domain.ItemWrapper;
 import vanek.pia.domain.User;
 import vanek.pia.service.ContactManager;
 import vanek.pia.service.InvoiceManager;
@@ -41,7 +42,7 @@ public class InvoiceController {
 	}
 	
 	@PostMapping("/confirmInvoice")
-	public ModelAndView confirmContact(@Valid @ModelAttribute("invoice") Invoice invoiceValues) {
+	public ModelAndView confirmInvoice(@Valid @ModelAttribute("invoice") Invoice invoiceValues) {
 		ModelAndView mav = new ModelAndView("newInvoice");
 		ModelMap modelMap = mav.getModelMap();
 		this.invoiceManager.addInvoice(invoiceValues);
@@ -81,7 +82,11 @@ public class InvoiceController {
 			
 		}
 		else {
-			List<Item> itemList = invoice.getItems();
+			List<Item> invoiceItemList = invoice.getItems();
+			ItemWrapper itemList = new ItemWrapper();
+			for (Item item : invoiceItemList) {
+				itemList.addItem(item);
+			}
 			modelMap.addAttribute("contacts", contactManager.getContacts());
 			modelMap.addAttribute("invoice", invoice);
 			modelMap.addAttribute("itemList",itemList);
@@ -99,4 +104,5 @@ public class InvoiceController {
 		invoiceManager.updateInvoice(invoice, invoiceValues);
 		return mav;
 	}
+	
 }

@@ -31,9 +31,6 @@ public class IndexController {
 	public ModelAndView index() throws IOException {
 		ModelAndView modelAndView = new ModelAndView("index");
 		ModelMap modelMap = modelAndView.getModelMap();
-		for (Invoice invoice : invoiceManager.getInvoices()) {
-			System.out.println(invoice.toString());
-		}
 		modelMap.addAttribute("users", userManager.getUsers());
 		modelMap.addAttribute("contacts", contactManager.getContacts());
 		modelMap.addAttribute("invoices", invoiceManager.getInvoices());

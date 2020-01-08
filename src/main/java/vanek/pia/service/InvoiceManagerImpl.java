@@ -1,5 +1,6 @@
 package vanek.pia.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -97,6 +98,23 @@ public class InvoiceManagerImpl implements InvoiceManager {
 		invoice.setCustomer(customer);
 		Contact supplier = contactRepo.findByName(invoiceValues.getSupplier().getName());
 		invoice.setSupplier(supplier);
+		
+		itemRepo.deleteAll(invoice.getItems());
+		invoice.getItems().clear();
+		
+		this.invoiceRepo.save(invoice);
+		
+		if(invoiceValues.getItems()==null) {
+			log.info("invoiceValues.getItems() are null");
+			return;
+		}
+		List<Item> itemList = new ArrayList<Item>();
+		for (Item item : invoiceValues.getItems()) {
+			Item tmpItem = new Item(item.getName(), item.getQuantity(), item.getPrice());
+			tmpItem.setInvoice(invoice);
+			itemList.add(tmpItem);
+			itemRepo.save(tmpItem);
+		}
 		
 		invoiceRepo.save(invoice);
 		
