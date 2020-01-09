@@ -10,6 +10,14 @@
 	<body>
 		<nav th:replace="fragments/headers :: nav"></nav>
 		<div class="content">
+		
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Unknown user</h1>
+			<br>
+			<p>You need to be logged in for browsing this page.</p>
+			<p>Please log in, or ask admin to register your account.</p>
+		</div>
+		
 			<h1>Invoice List</h1>
 			
 			<h2 style=color:red><div th:text="${message}"></div></h2>
@@ -17,8 +25,11 @@
 				<th:block th:each="invoice : ${invoices}">
 					<tr class="list-row">
 						<td><span class="item-name" th:text="${invoice.documentSerialNumber}"></span></td>
+						<div sec:authorize="hasAuthority('ACCOUNTANT')">
 						<td><a class="item-control-edit" th:href="@{/invoiceList/invoice?id={id}(id=${invoice.Id})}"><i class="fa fa-edit">Edit</i></a></td>
+						</div>				
 					</tr>
+					
 				</th:block>
 			</table>
 		</div>

@@ -22,30 +22,6 @@
             Text visible only to authenticated users.
         </div>
         <div sec:authorize="hasAuthority('ADMIN')">
-	        <form th:action="@{/registration}" method="post">
-	        	<div>Users</div>
-	        	<input type="submit" value="Registration" />
-	        </form>
-
-			<form th:action="@{/userList}" method="post">
-				<input type="submit" value="Edit Users" />
-			</form>
-
-			<form th:action="@{/newContact}" method="post">
-	        	<div>Contacts</div>
-	        	<input type="submit" value="New Contact" />
-	        </form>
-			<form th:action="@{/contactList}" method="post">
-	        	<input type="submit" value="Edit Contacts" />
-	        </form>
-
-			<form th:action="@{/newInvoice}" method="post">
-				<div>Invoice</div>
-				<input type="submit" value="New Invoice">
-			</form> 
-			<form th:action="@{/invoiceList}" method="post">
-				<input type="submit" value="Edit Invoices">
-			</form>
         
          <h2>USERS</h2>
 	        <table>

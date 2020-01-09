@@ -11,6 +11,24 @@
 	
 		<nav th:replace="fragments/headers :: nav"></nav>
 		<div class="content">
+		
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Unknown user</h1>
+			<br>
+			<p>You need to be logged in for browsing this page.</p>
+			<p>Please log in, or ask admin to register your account.</p>
+		</div>
+		
+		<div sec:authorize="isAuthenticated()">
+		
+		<div sec:authorize="!hasAuthority('ADMIN')">
+			<h1>Not Admin</h1>
+			<br>
+			<p>This page can be seen only by administrator.</p>
+			<p>Please log in as admin, or ask admin to register your admin account.</p>
+		</div>
+		
+		<div sec:authorize="hasAuthority('ADMIN')">
 		 
 		<h1>Edit User <Label th:text="${user.username}"></Label> </h1>	
 		<form th:action="@{/confirmEditUser?id={id}(id=${user.Id})}" method="post">
@@ -54,6 +72,7 @@
 			</li>
 		</ul>
 		</form>
+		</div>
 		</div>
 	</body>
 </html>

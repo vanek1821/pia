@@ -6,12 +6,14 @@
 >
 	<head th:fragment="head(title)">
 		<title th:replace="${title}">PIA ukázka</title>
+		
 		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}">
 		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/all.min.css}">
 	</head>
 
 	
 	<body>
+		<script th:src="@{/JS/responsiveMenu.js}"></script>
 		<nav th:fragment="nav">
 		<div class="topnav" th:fragment="nav">
 		  <a class="active" th:href="@{/}">Home</a>
@@ -47,8 +49,13 @@
 		  <span class="logged-user" sec:authentication="name"></span>
 		    <a th:href="@{/logout}">Login</a>
 		    <a th:href="@{/logout}">Logout</a>
+		    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+    		<i class="fa fa-bars"></i>
+  			</a>
 		  </div>
+		  
 		</div>
+		
 	</nav>
 	</body>
 </html>

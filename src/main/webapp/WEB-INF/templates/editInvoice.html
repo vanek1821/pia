@@ -10,7 +10,27 @@
 	<body>
 		<script th:src="@{/JS/addingItems.js}"></script>
 		<nav th:replace="fragments/headers :: nav"></nav>
+		
 		<div class="content">
+		
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Unknown user</h1>
+			<br>
+			<p>You need to be logged in for browsing this page.</p>
+			<p>Please log in, or ask admin to register your account.</p>
+		</div>
+		
+		<div sec:authorize="isAuthenticated()">
+		
+		<div sec:authorize="!hasAuthority('ACCOUNTANT')">
+			<h1>Not Accountant</h1>
+			<br>
+			<p>This page can be seen only by administrator.</p>
+			<p>Please log in as accountant, or ask admin to register your accountant account.</p>
+		</div>
+		
+		<div sec:authorize="hasAuthority('ACCOUNTANT')">
+		
 		<h1>EDIT INVOICE <Label th:text="${invoice.documentSerialNumber}"></Label> </h1>
 		
 			<form th:action="@{/confirmEditInvoice?id={id}(id=${invoice.Id})}" method="post">
@@ -88,6 +108,7 @@
 		</form>
 		
 		<div th:text="${message}"></div>
+		</div>
 		</div>
 	</body>
 </html>

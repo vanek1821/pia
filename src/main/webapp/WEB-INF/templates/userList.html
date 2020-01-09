@@ -10,6 +10,13 @@
 	<body>
 	<nav th:replace="fragments/headers :: nav"></nav>
 	<div class="content">
+	
+	<div sec:authorize="!isAuthenticated()">
+		<h1>Unknown user</h1>
+		<br>
+		<p>You need to be logged in for browsing this page.</p>
+		<p>Please log in, or ask admin to register your account.</p>
+	</div>			
 				
 			<h1>Users</h1>
 			
@@ -19,8 +26,11 @@
 				<th:block th:each="user : ${users}">			
 					<tr class="list-row">
 						<td><span class="item-name" th:text="${user.username}"></span></td>
-						<td><a class="item-control-edit" th:href="@{/userList/user?id={id}(id=${user.Id})}"><i class="fa fa-edit">Edit</i></a></td>
-						<td><a class="item-control-delete" th:href="@{/delete?id={id}(id=${user.Id})}"><i class="fa fa-trash-alt">Delete</i></a></td>
+						<div sec:authorize="hasAuthority('ADMIN')">
+							<td><a class="item-control-edit" th:href="@{/userList/user?id={id}(id=${user.Id})}"><i class="fa fa-edit">Edit</i></a></td>
+							<td><a class="item-control-delete" th:href="@{/delete?id={id}(id=${user.Id})}"><i class="fa fa-trash-alt">Delete</i></a></td>
+						</div>
+					</tr>
 				</th:block>
 			</table>
 		</div>

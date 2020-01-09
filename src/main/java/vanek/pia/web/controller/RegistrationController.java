@@ -49,11 +49,13 @@ public class RegistrationController {
 		ModelMap modelMap = modelAndView.getModelMap();
 		//this.userManager.addUser(userValues.getUsername(), userValues.getPassword(), userValues.getFullName(), userValues.getPersonalIDNum(), userValues.getAdress(), userValues.getEmail(), userValues.getPhone(), userValues.getBankAcc());
 		if (this.userManager.addUser(userValues)){
+			modelMap.addAttribute("roles", roleManager.getRoles());
 			modelMap.addAttribute("class", "success");
 			modelMap.addAttribute("message", "Registration Successfull");
 			return modelAndView;
 		}
 		else {
+			modelMap.addAttribute("roles", roleManager.getRoles());
 			modelMap.addAttribute("class", "error");
 			modelMap.addAttribute("message", "ERROR: user already exists");
 			return modelAndView;

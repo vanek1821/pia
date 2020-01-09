@@ -10,6 +10,25 @@
 		<script th:src="@{/JS/addingItems.js}"></script>
 		<nav th:replace="fragments/headers :: nav"></nav>
 		<div class="content">
+		
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Unknown user</h1>
+			<br>
+			<p>You need to be logged in for browsing this page.</p>
+			<p>Please log in, or ask admin to register your account.</p>
+		</div>
+		
+		<div sec:authorize="isAuthenticated()">
+		
+		<div sec:authorize="!hasAuthority('ACCOUNTANT')">
+			<h1>Not Accountant</h1>
+			<br>
+			<p>This page can be seen only by administrator.</p>
+			<p>Please log in as accountant, or ask admin to register your accountant account.</p>
+		</div>
+		
+		<div sec:authorize="hasAuthority('ACCOUNTANT')">
+		
 		<h1>New Invoice</h1>
 		<form th:action="@{/confirmInvoice}" method="post">
 		<ul class="form-style-1">
@@ -74,57 +93,8 @@
 		
 		<div th:class="${class}" th:text="${message}"></div>
 		
-		</div>		
+		</div>	
+		</div>	
 	</body>
 </html>
 
-<!-- 
-<form th:action="@{/confirmInvoice}" method="post">
-		<div>
-			 <select th:field="*{invoice.supplier.name}">
-              <option th:each="contact : ${contacts}"
-                        th:value="${contact.name}"
-                        th:utext="${contact.name}"/>
-           		 </select>
-			</div>
-			<div>
-			<select th:field="*{invoice.customer.name}">
-              <option th:each="contact : ${contacts}"
-                        th:value="${contact.name}"
-                        th:utext="${contact.name}"/>
-           		 </select>
-			</div>
-			<div>
-				<label for="documentSerialNumber">Document Serial Number: </label><input type="text" name="documentSerialNumber" id="documentSerialNumber" />
-			</div>
-			<div>
-				<label for="dateExposure">Exposure Date: </label><input type="text" name="dateExposure" id="dateExposure" />
-			</div>
-			<div>
-				<label for="dateDue">Due Date: </label><input type="text" name="dateDue" id="dateDue" />
-			</div>
-			<div>
-				<label for="dateExecution">Execution Date: </label><input type="text" name="dateExecution" id="dateExecution" />
-			</div>
-			<div>
-				<label for="symbolVariable">Variable Symbol: </label><input type="text" name="symbolVariable" id="symbolVariable" />
-			</div>
-			<div>
-				<label for="symbolConstant">Constant Symbol: </label><input type="text" name="symbolConstant" id="symbolConstant" />
-			</div>
-			<br><br><br>
-			<table id="itemTable">
-				<tr>
-					<th>Name</th>
-					<th>Quantity</th>
-					<th>Price</th>
-				</tr>
-			</table>
-			<div>
-					<button th:disabled="${invoice.cancelled}" type="button" onclick="addRow()" id="addRowButton" class="butto">Add Item</button>
-				</div>
-			<br><br>
-			<div>
-				<input type="submit" value="Confirm" />
-			</div>
- -->

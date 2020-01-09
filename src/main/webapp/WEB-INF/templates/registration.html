@@ -7,60 +7,81 @@
 	<body>
 		<nav th:replace="fragments/headers :: nav"></nav>
 		<div class="content">
-		<h1>New User Registration</h1>
 		
-		<form th:action="@{/register}" method="post">
-		<ul class="form-style-1">
-			<li>
-				<label>Username <span class="required">*</span></label>
-				<input type="text" name="username" class="field-long" />
-			</li>
-			<li>
-				<label for="password">Password <span class="required">*</span> </label>
-				<input type="password" name="password" class="field-long" />
-			</li>
-			<li>
-				<label>Full Name <span class="required">*</span></label>
-				<input type="text" name="fullName" class="field-long" />
-			</li>
-			<li>
-				<label>Personal ID Number</label>
-				<input type="text" name="personalIDNum" class="field-long" />
-			</li>
-			<li>
-				<label>Address</label>
-				<input type="text" name="adress" class="field-long" />
-			</li>
-			<li>
-				<label>E-mail<span class="required">*</span></label>
-				<input type="email" name="email" class="field-long" />
-			</li>
-			<li>
-				<label >Phone Number </label>
-				<input type="text" name="phone" class="field-long" />
-			</li>
-			<li>
-				<label>Bank Account </label>
-				<input type="text" name="bankAcc" class="field-long" />
-			</li>
-			<li>
-		        <label>Role</label>
-		        <select th:field="*{user.role.code}" class="field-select">
-               		<option th:each="role : ${roles}"
-                        th:value="${role.code}"
-                        th:utext="${role.name}"
-                        />
-            	</select>
-		    </li>
-		    <li>
-				<input type="submit" value="Register" />
-			</li>
-		</ul>
-		</form>
-		
-		<div th:class="${class}" th:text="${message}"></div>
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Unknown user</h1>
+			<br>
+			<p>You need to be logged in for browsing this page.</p>
+			<p>Please log in, or ask admin to register your account.</p>
 		</div>
 		
+		<div sec:authorize="isAuthenticated()">
+		
+		<div sec:authorize="!hasAuthority('ADMIN')">
+			<h1>Not Admin</h1>
+			<br>
+			<p>This page can be seen only by administrator.</p>
+			<p>Please log in as admin, or ask admin to register your admin account.</p>
+		</div>
+		
+		<div sec:authorize="hasAuthority('ADMIN')">
+			
+			<h1>New User Registration</h1>
+			
+			<form th:action="@{/register}" method="post">
+			<ul class="form-style-1">
+				<li>
+					<label>Username <span class="required">*</span></label>
+					<input type="text" name="username" class="field-long" />
+				</li>
+				<li>
+					<label for="password">Password <span class="required">*</span> </label>
+					<input type="password" name="password" class="field-long" />
+				</li>
+				<li>
+					<label>Full Name <span class="required">*</span></label>
+					<input type="text" name="fullName" class="field-long" />
+				</li>
+				<li>
+					<label>Personal ID Number</label>
+					<input type="text" name="personalIDNum" class="field-long" />
+				</li>
+				<li>
+					<label>Address</label>
+					<input type="text" name="adress" class="field-long" />
+				</li>
+				<li>
+					<label>E-mail<span class="required">*</span></label>
+					<input type="email" name="email" class="field-long" />
+				</li>
+				<li>
+					<label >Phone Number </label>
+					<input type="text" name="phone" class="field-long" />
+				</li>
+				<li>
+					<label>Bank Account </label>
+					<input type="text" name="bankAcc" class="field-long" />
+				</li>
+				<li>
+			        <label>Role</label>
+			        <select th:field="*{user.role.code}" class="field-select">
+	               		<option th:each="role : ${roles}"
+	                        th:value="${role.code}"
+	                        th:utext="${role.name}"
+	                        />
+	            	</select>
+			    </li>
+			    <li>
+					<input type="submit" value="Register" />
+				</li>
+			</ul>
+			</form>
+			
+			<div th:class="${class}" th:text="${message}"></div>
+			</div>
+			</div>
+			
+		</div>
 	</body>
 </html>
 
