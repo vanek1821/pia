@@ -9,54 +9,54 @@
 		
 		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/style.css}">
 		<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/all.min.css}">
+		<script th:src="@{/JS/responsiveMenu.js}" type="text/javascript"></script>
+
+
 	</head>
 
 	
 	<body>
-		<script th:src="@{/JS/responsiveMenu.js}"></script>
 		<nav th:fragment="nav">
-		<div class="topnav" th:fragment="nav">
-		  <a class="active" th:href="@{/}">Home</a>
-		  <div class="dropdown">
-			    <button class="dropbtn">Users 
-			      <i class="fa fa-caret-down"></i>
-			    </button>
-			    <div class="dropdown-content">
-				      <a th:href="@{/userList}">User List</a>
-				      <a th:href="@{/registration}">New User</a>
-			    </div>
-		  </div> 
-		  <div class="dropdown">
-			    <button class="dropbtn">Contacts 
-			      <i class="fa fa-caret-down"></i>
-			    </button>
-			    <div class="dropdown-content">
-			      <a th:href="@{/contactList}">Contact List</a>
-			      <a th:href="@{/newContact}">New Contact</a>
-			    </div>
-		  </div> 
-		  <div class="dropdown">
-			    <button class="dropbtn">Invoices 
-			      <i class="fa fa-caret-down"></i>
-			    </button>
-			    <div class="dropdown-content">
-			      <a th:href="@{/invoiceList}">Invoice List</a> 
-			      <a th:href="@{/newInvoice}">New Invoice</a>
-			    </div>
-		  </div> 
+			<div class="topnav" id="myTopnav" th:fragment="nav">
+			  <a th:href="@{/}">Home</a>
+			  <div class="dropdown">
+					<button class="dropbtn">Users
+					  <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+						  <a th:href="@{/userList}">User List</a>
+						  <a th:href="@{/registration}">New User</a>
+					</div>
+			  </div>
+			  <div class="dropdown">
+					<button class="dropbtn">Contacts
+					  <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+					  <a th:href="@{/contactList}">Contact List</a>
+					  <a th:href="@{/newContact}">New Contact</a>
+					</div>
+			  </div>
+			  <div class="dropdown">
+					<button class="dropbtn">Invoices
+					  <i class="fa fa-caret-down"></i>
+					</button>
+					<div class="dropdown-content">
+					  <a th:href="@{/invoiceList}">Invoice List</a>
+					  <a th:href="@{/newInvoice}">New Invoice</a>
+					</div>
+			  </div>
 
-		  <div class="topnav-right">
-		  <span class="logged-user" sec:authentication="name"></span>
-		    <a th:href="@{/logout}">Login</a>
-		    <a th:href="@{/logout}">Logout</a>
-		    <a href="javascript:void(0);" class="icon" onclick="myFunction()">
-    		<i class="fa fa-bars"></i>
-  			</a>
-		  </div>
-		  
-		</div>
-		
-	</nav>
+			  <div class="topnav-right">
+			  <span class="logged-user" sec:authentication="name"></span>
+				<a th:href="@{/logout}">Login</a>
+				<a th:href="@{/logout}">Logout</a>
+				<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+			  </div>
+
+			</div>
+		</nav>
+
 	</body>
 </html>
 

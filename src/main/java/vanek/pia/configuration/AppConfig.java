@@ -76,7 +76,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter implements WebMvcCon
 		http
 		.authorizeRequests()
 			.mvcMatchers("/login").permitAll()
-			.regexMatchers(HttpMethod.GET, "^/css/.*", "^/webfonts/.*").permitAll()
+			.regexMatchers(HttpMethod.GET, "^/css/.*", "^/webfonts/.*", "^/JS/.*").permitAll()
 			.antMatchers("/").permitAll()
 			.anyRequest().authenticated()
 			.and()
