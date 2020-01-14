@@ -7,11 +7,20 @@ Projekt se spustí z kořenové složky spuštěním skriptu "run.sh"
 ## Přihlašovací údaje
 
 Admin:
+
   login: admin
+  
   heslo: default
+  
 Accountant:
+
   login: acc
+  
   heslo: acc
+  
 User
+
   login: user
+  
   heslo: user
+  
