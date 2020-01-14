@@ -6,21 +6,23 @@ Projekt se spustí z kořenové složky spuštěním skriptu "run.sh"
 
 ## Přihlašovací údaje
 
-Admin:
-
-  login: admin
-  
-  heslo: default
-  
-Accountant:
-
-  login: acc
-  
-  heslo: acc
-  
-User
-
-  login: user
-  
-  heslo: user
-  
+<ul>
+<li>Admin:
+  <ul>
+    <li>login: admin</li>
+    <li>heslo: default</li>
+  </ul>
+  </li>
+<li>Accountant:
+  <ul>
+    <li>login: acc</li>
+    <li>heslo: acc</li>
+  </ul>
+  </li>
+<li>User:
+  <ul>
+    <li>login: user</li>
+    <li>heslo: user</li>
+  </ul>
+  </li>
+</ul>
