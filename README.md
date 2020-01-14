@@ -1,8 +1,17 @@
-# pia
+# Spuštění
 
-* [Thymeleaf & Spring](https://github.com/thymeleaf/thymeleafexamples-stsm)
-* [Spring Project Generator](https://start.spring.io/)
+Projekt se spustí z kořenové složky spuštěním skriptu "run.sh"
 
-## JPA + Lazy
+( Z mně neznámého důvodu build 1x spadl na "bean cycle". Spustil jsem build znovu a fungovalo bez problému. )
 
-[How to load lazy fetched items from Hibernate/JPA in my controller](https://stackoverflow.com/questions/15359306/how-to-load-lazy-fetched-items-from-hibernate-jpa-in-my-controller)
+## Přihlašovací údaje
+
+Admin:
+  login: admin
+  heslo: default
+Accountant:
+  login: acc
+  heslo: acc
+User
+  login: user
+  heslo: user
