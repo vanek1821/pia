@@ -16,4 +16,6 @@ public interface InvoiceManager {
 
 	void updateInvoice(Invoice invoice, @Valid Invoice invoiceValues);
 
+	boolean updateInvoiceCancelled(Long idLong);
+
 }

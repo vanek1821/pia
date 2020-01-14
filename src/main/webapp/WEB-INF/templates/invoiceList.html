@@ -25,9 +25,11 @@
 				<th:block th:each="invoice : ${invoices}">
 					<tr class="list-row">
 						<td><span class="item-name" th:text="${invoice.documentSerialNumber}"></span></td>
+						<td><a class="item-control-view" th:href="@{/invoiceList/viewInvoice?id={id}(id=${invoice.Id})}"><i class="fa fa-eye">View</i></a></td>
 						<div sec:authorize="hasAuthority('ACCOUNTANT')">
 						<td><a class="item-control-edit" th:href="@{/invoiceList/invoice?id={id}(id=${invoice.Id})}"><i class="fa fa-edit">Edit</i></a></td>
-						</div>				
+						</div>		
+								
 					</tr>
 					
 				</th:block>

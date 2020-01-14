@@ -31,7 +31,8 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 	private static final String DEFAULT_USER = "admin";
 	private static final String DEFAULT_PASSWORD = "default";
 
-	private final PasswordEncoder encoder;
+	@Autowired
+	private PasswordEncoder encoder;
 
 	private final UserRepository userRepo;
 	private final RoleRepository roleRepo;
@@ -76,13 +77,23 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 	@Transactional
 	public void setup() {
 		if (this.userRepo.count() == 0) {
-			log.info("No user present, creating admin.");
+			log.info("No user present, creating admin, accountant and user.");
 			this.addUser(DEFAULT_USER, DEFAULT_PASSWORD, "", "", "" ,"" ,"" ,"");
 			User user = this.userRepo.findByUsername(DEFAULT_USER);
 			Role role = this.roleRepo.findByCode("ADMIN");
-			//user.getRoles().add(role);
 			user.setRole(role);
+			this.userRepo.save(user);
 			
+			this.addUser("acc", "acc", "Accountant", "123456789/1234", "acc_address", "acc@acc.com", "987654321", "112233445566/0100");
+			user = this.userRepo.findByUsername("acc");
+			role = this.roleRepo.findByCode("ACCOUNTANT");
+			user.setRole(role);
+			this.userRepo.save(user);
+			
+			this.addUser("user", "user", "User", "123456789/1234", "user_addreses", "user@user.com", "987654321", "112233445566/0100");
+			user = this.userRepo.findByUsername("user");
+			role = this.roleRepo.findByCode("USER");
+			user.setRole(role);
 			this.userRepo.save(user);
 		}
 	}
@@ -125,6 +136,9 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 
 	@Override
 	public void updateUser(User user, @Valid User userValues) {
+		if(!userValues.getPassword().isEmpty()) {
+			user.setPassword(this.encoder.encode(userValues.getPassword()));
+		}
 		user.setFullName(userValues.getFullName());
 		user.setPersonalIDNum(userValues.getPersonalIDNum());
 		user.setAdress(userValues.getAdress());
@@ -151,6 +165,37 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 		User user = new User(username, hashed, fullName, personalIDNum, adress, email, phone, bankAcc);
 		this.userRepo.save(user);
 		
+	}
+
+	@Override
+	public int changePassword(String username, String currentPassword, String newPassword, String confirmPassword) {
+		User user = this.findUserByName(username);
+		
+		if(currentPassword.isEmpty()) {
+			return -1;
+		}
+		else if(newPassword.isEmpty()) {
+			return -2;
+		}
+		else if(confirmPassword.isEmpty()) {
+			return -3;
+		}
+		else if(newPassword.equals(currentPassword)) {
+			return -4;
+		}
+		else if(!newPassword.equals(confirmPassword)) {
+			return -5;
+		}
+		else if(!encoder.matches(currentPassword, user.getPassword())) {
+			return -6;
+		}
+		else {
+			user.setPassword(encoder.encode(newPassword));
+			userRepo.save(user);
+		}
+		
+		
+		return 0;
 	}
 
 }

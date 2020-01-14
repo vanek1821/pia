@@ -79,10 +79,22 @@ public class InvoiceController {
 	}
 	
 	@GetMapping("/invoiceList/invoice")
-	public ModelAndView editInvoice(@RequestParam("id") Long id) {
-		Invoice invoice = invoiceManager.getById(id);
+	public ModelAndView editInvoice(@RequestParam("id") String id) {
+		Long idLong = null;
 		ModelAndView mav = new ModelAndView("editInvoice");
 		ModelMap modelMap = mav.getModelMap();
+		try {
+			idLong = Long.parseLong(id);
+		} catch (Exception e) {
+			mav = new ModelAndView("invoiceList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Wrong ID Format");
+			modelMap.addAttribute("invoices", invoiceManager.getInvoices());
+			return mav;
+		}
+		
+		Invoice invoice = invoiceManager.getById(idLong);
+		
 		if(invoice == null) {
 			mav = new ModelAndView("invoiceList");
 			modelMap = mav.getModelMap();
@@ -105,12 +117,74 @@ public class InvoiceController {
 	}
 	
 	@PostMapping("/confirmEditInvoice")
-	public ModelAndView confirmEdit(@RequestParam("id") Long id, @Valid @ModelAttribute("invoice") Invoice invoiceValues) {
+	public ModelAndView confirmEdit(@RequestParam("id") String id, @Valid @ModelAttribute("invoice") Invoice invoiceValues,
+			@RequestParam(value="action", required=true) String action) {
 		ModelAndView mav = new ModelAndView("redirect:/invoiceList");
 		ModelMap modelMap = mav.getModelMap();
+		Long idLong = null;
+		try {
+			idLong = Long.parseLong(id);
+		} catch (Exception e) {
+			mav = new ModelAndView("invoiceList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Wrong ID Format");
+			modelMap.addAttribute("invoices", invoiceManager.getInvoices());
+			return mav;
+		}
 		
-		Invoice invoice = invoiceManager.getById(id);
-		invoiceManager.updateInvoice(invoice, invoiceValues);
+		switch(action) {
+		case "stornoInvoice":
+			if (!invoiceManager.updateInvoiceCancelled(idLong)) {
+				modelMap.addAttribute("message", "Invoice Not Found");
+				return mav;
+			}
+			break;
+		case "Confirm":
+			Invoice invoice = invoiceManager.getById(idLong);
+			invoiceManager.updateInvoice(invoice, invoiceValues);
+			return mav;	
+		}
+		
+		return mav;
+		
+		
+	}
+	
+	@GetMapping("/invoiceList/viewInvoice")
+	public ModelAndView viewInvoice(@RequestParam("id") String id) {
+		Long idLong = null;
+		ModelAndView mav = new ModelAndView("invoiceView");
+		ModelMap modelMap = mav.getModelMap();
+		try {
+			idLong = Long.parseLong(id);
+		} catch (Exception e) {
+			mav = new ModelAndView("invoiceList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Wrong ID Format");
+			modelMap.addAttribute("invoices", invoiceManager.getInvoices());
+			return mav;
+		}
+		
+		Invoice invoice = invoiceManager.getById(idLong);
+		
+		if(invoice == null) {
+			mav = new ModelAndView("invoiceList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Invoice Not Found");
+			modelMap.addAttribute("invoices", invoiceManager.getInvoices());
+			
+		}
+		else {
+			List<Item> invoiceItemList = invoice.getItems();
+			ItemWrapper itemList = new ItemWrapper();
+			for (Item item : invoiceItemList) {
+				itemList.addItem(item);
+			}
+			modelMap.addAttribute("contacts", contactManager.getContacts());
+			modelMap.addAttribute("invoice", invoice);
+			modelMap.addAttribute("itemList",itemList);
+		}
+		
 		return mav;
 	}
 	

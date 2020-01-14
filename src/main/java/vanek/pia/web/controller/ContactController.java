@@ -62,10 +62,23 @@ public class ContactController {
 	
 	
 	@PostMapping("/confirmEditContact")
-	public ModelAndView confirmEditContact(@RequestParam("id") Long id, @Valid @ModelAttribute("contact") Contact contactValues) {
+	public ModelAndView confirmEditContact(@RequestParam("id") String id, @Valid @ModelAttribute("contact") Contact contactValues) {
+		
+		Long idLong = null;
+		try {
+			idLong = Long.parseLong(id);
+		} catch (Exception e) {
+			ModelAndView mav = new ModelAndView("contactList");
+			ModelMap modelMap = mav.getModelMap();
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Wrong ID Format");
+			modelMap.addAttribute("contacts", contactManager.getContacts());
+			return mav;
+		}
+		
 		ModelAndView mav = new ModelAndView("redirect:/contactList");
 		ModelMap modelMap = mav.getModelMap();
-		Contact contact = contactManager.getById(id);
+		Contact contact = contactManager.getById(idLong);
 		contactManager.updateContact(contact, contactValues);
 		return mav;
 	}
@@ -80,10 +93,23 @@ public class ContactController {
 	}
 	
 	@GetMapping("/contactList/contact")
-	public ModelAndView editUser(@RequestParam("id") Long id) {
-		Contact contact = contactManager.getById(id);
+	public ModelAndView editUser(@RequestParam("id") String id) {
+		
 		ModelAndView mav = new ModelAndView("editContact");
 		ModelMap modelMap = mav.getModelMap();
+		Long idLong = null;
+		try {
+			idLong = Long.parseLong(id);
+			
+		} catch (Exception e) {
+			mav = new ModelAndView("contactList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Wrong ID Format");
+			modelMap.addAttribute("contacts", contactManager.getContacts());
+			return mav;
+		}
+		
+		Contact contact = contactManager.getById(idLong);
 		if(contact == null) {
 			mav = new ModelAndView("contactList");
 			modelMap = mav.getModelMap();
@@ -106,10 +132,23 @@ public class ContactController {
 		return mav;
 	}
 	@GetMapping("/deleteContact")
-	public ModelAndView deleteContact(@RequestParam("id") Long id) {
+	public ModelAndView deleteContact(@RequestParam("id") String id) {
 		ModelAndView mav = new ModelAndView("redirect:/contactList");
 		ModelMap modelMap = mav.getModelMap();
-		contactManager.deleteContact(id);
+		
+		Long idLong = null;
+		try {
+			idLong = Long.parseLong(id);
+			
+		} catch (Exception e) {
+			mav = new ModelAndView("contactList");
+			modelMap = mav.getModelMap();
+			modelMap.addAttribute("message", "Wrong ID Format");
+			modelMap.addAttribute("contacts", contactManager.getContacts());
+			return mav;
+		}
+		
+		contactManager.deleteContact(idLong);
 		return mav;
 	}
 	

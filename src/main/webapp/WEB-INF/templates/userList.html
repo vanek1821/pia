@@ -26,6 +26,7 @@
 				<th:block th:each="user : ${users}">			
 					<tr class="list-row">
 						<td><span class="item-name" th:text="${user.username}"></span></td>
+						<!-- <td><span class="item-name" th:text="${user.password}"></span></td> --> 
 						<div sec:authorize="hasAuthority('ADMIN')">
 							<td><a class="item-control-edit" th:href="@{/userList/user?id={id}(id=${user.Id})}"><i class="fa fa-edit">Edit</i></a></td>
 							<td><a class="item-control-delete" th:href="@{/delete?id={id}(id=${user.Id})}"><i class="fa fa-trash-alt">Delete</i></a></td>

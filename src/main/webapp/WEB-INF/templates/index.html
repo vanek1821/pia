@@ -16,114 +16,23 @@
 			<br>
 			<p>For browsing this site, please login.</p>
 		</div>
-		<div sec:authorize="hasAuthority('USER')">Text visible to user.</div>
-        <div sec:authorize="hasAuthority('ADMIN')">Text visible to admin.</div>
         <div sec:authorize="isAuthenticated()">
-            Text visible only to authenticated users.
-        </div>
-        <div sec:authorize="hasAuthority('ADMIN')">
+            <h2>Text visible only to authenticated users.</h2>
         
-         <h2>USERS</h2>
-	        <table>
-	        	<tr>
-					<th>Username</th>
-					<th>fullname</th>
-					<th>pidnum</th>
-					<th>adress</th>
-					<th>email</th>
-					<th>phone</th>
-					<th>bankacc</th>
-					<th>role</th>
-				</tr>
-				<th:block th:each="user : ${users}">
-					
-					<tr>
-						<td th:text="${user.username}">...</td>
-						<td th:text="${user.fullName}">...</td>
-						<td th:text="${user.personalIDNum}">...</td>
-						<td th:text="${user.adress}">...</td>
-						<td th:text="${user.email}">...</td>
-						<td th:text="${user.phone}">...</td>
-						<td th:text="${user.bankAcc}">...</td>
-						<td th:text="${user.role.code}">...</td>
-						
-					</tr>
-				</th:block>
-			</table>
-
-		<h2>CONTACTS</h2>
-
-			<table>
-	        	<tr>
-					<th>name</th>
-					<th>residence</th>
-					<th>identificationNum</th>
-					<th>taxIdNum</th>
-					<th>phone</th>
-					<th>email</th>
-					<th>bankAcc</th>
-				</tr>
-				<th:block th:each="contact : ${contacts}">
-					
-					<tr>
-						<td th:text="${contact.name}">...</td>
-						<td th:text="${contact.residence}">...</td>
-						<td th:text="${contact.identificationNumber}">...</td>
-						<td th:text="${contact.taxIdentificationNumber}">...</td>
-						<td th:text="${contact.phone}">...</td>
-						<td th:text="${contact.email}">...</td>
-						<td th:text="${contact.bankAcc}">...</td>
-						
-					</tr>
-				</th:block>
-			</table>
-
-			<h2>INVOICES</h2>
-
-			<table>
-	        	<tr>
-					<th>SerialNumber</th>
-					<th>dateExposure</th>
-					<th>dueDate</th>
-					<th>dateExecution</th>
-					<th>symbolVariable</th>
-					<th>symbolConstant</th>
-					<th>cancelled</th>
-					<th>supplier</th>
-					<th>customer</th>	
-
-				</tr>
-				<th:block th:each="invoice : ${invoices}">
-					
-					<tr>
-						<td th:text="${invoice.documentSerialNumber}">...</td>
-						<td th:text="${invoice.dateExposure}">...</td>
-						<td th:text="${invoice.dateDue}">...</td>
-						<td th:text="${invoice.dateExecution}">...</td>
-						<td th:text="${invoice.symbolVariable}">...</td>
-						<td th:text="${invoice.symbolConstant}">...</td>
-						<td th:text="${invoice.cancelled}">...</td>
-						<td th:text="${invoice.supplier.name}">...</td>
-						<td th:text="${invoice.customer.name}">...</td>
-						
-					</tr>
-					
-				 	<th:block th:each="item : ${invoice.items}">
-				 	<tr>
-						<td th:text="${item.name}">...</td>
-						 <td th:text="${item.quantity}">...</td>
-						<td th:text="${item.price}">...</td>
-						<td th:text="${item.fullPrice}">...</td>
-					</tr>	
-					</th:block>
-					 
-					
-					
-				</th:block>
-				
-			</table>
-		</div>
-		</div>
+        	<p>
+        		Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Etiam neque. Donec vitae arcu. Proin mattis lacinia justo. Aenean fermentum risus id tortor. Vestibulum fermentum tortor id mi. Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Phasellus et lorem id felis nonummy placerat. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+			<br>
+				Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam sed tellus id magna elementum tincidunt. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Etiam commodo dui eget wisi. Duis viverra diam non justo. Cras elementum. Fusce suscipit libero eget elit. Maecenas libero. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. Aliquam id dolor. Pellentesque ipsum. Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur? Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer malesuada.
+				<br>
+				Nulla non arcu lacinia neque faucibus fringilla. Mauris metus. Aenean fermentum risus id tortor. Duis bibendum, lectus ut viverra rhoncus, dolor nunc faucibus libero, eget facilisis enim ipsum id lacus. Maecenas lorem. Etiam egestas wisi a erat. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. Nullam justo enim, consectetuer nec, ullamcorper ac, vestibulum in, elit. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Vestibulum fermentum tortor id mi. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nullam dapibus fermentum ipsum. Donec ipsum massa, ullamcorper in, auctor et, scelerisque sed, est. Integer vulputate sem a nibh rutrum consequat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Nullam sapien sem, ornare ac, nonummy non, lobortis a enim. Etiam commodo dui eget wisi.
+				<br>
+				Etiam ligula pede, sagittis quis, interdum ultricies, scelerisque eu. Fusce suscipit libero eget elit. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Duis ante orci, molestie vitae vehicula venenatis, tincidunt ac pede. Aliquam erat volutpat. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Maecenas aliquet accumsan leo. Praesent vitae arcu tempor neque lacinia pretium. Integer tempor.
+				<br>
+				Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Aenean id metus id velit ullamcorper pulvinar. Curabitur bibendum justo non orci. Etiam neque. Aliquam in lorem sit amet leo accumsan lacinia. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Curabitur vitae diam non enim vestibulum interdum. Integer tempor. Et harum quidem rerum facilis est et expedita distinctio. Nullam lectus justo, vulputate eget mollis sed, tempor sed magna. Nulla turpis magna, cursus sit amet, suscipit a, interdum id, felis. Mauris elementum mauris vitae tortor. Integer lacinia. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos. Etiam egestas wisi a erat. Donec quis nibh at felis congue commodo. Fusce tellus odio, dapibus id fermentum quis, suscipit id erat. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos hymenaeos.
+        	</p>
+        	
+        	</div>
+        </div>
 	</body>
 </html>
 

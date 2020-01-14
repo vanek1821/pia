@@ -121,4 +121,21 @@ public class InvoiceManagerImpl implements InvoiceManager {
 		
 	}
 
+
+	@Override
+	public boolean updateInvoiceCancelled(Long idLong) {
+		Invoice invoice = invoiceRepo.getById(idLong);
+		if (invoice == null) {
+			return false;
+		}
+		else {
+			invoice.setCancelled(true);
+			invoiceRepo.save(invoice);
+			return true;
+		}
+		
+
+		
+	}
+
 }

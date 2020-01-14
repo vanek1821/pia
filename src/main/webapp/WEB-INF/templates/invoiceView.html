@@ -20,17 +20,118 @@
 			<p>Please log in, or ask admin to register your account.</p>
 		</div>
 		
-		<div sec:authorize="isAuthenticated()">
+		<div sec:authorize="isAuthenticated()">	
+		<h1>View Invoice <Label th:text="${invoice.documentSerialNumber}"></Label> </h1>
 		
-		<div sec:authorize="!hasAuthority('ACCOUNTANT')">
-			<h1>Not Accountant</h1>
+		
+		
+			<form th:action="@{/confirmEditInvoice?id={id}(id=${invoice.Id})}" method="post">
+			<ul class="form-style-1">
+			
+			<li>
+				<div th:if="${invoice.cancelled}">
+					<h2>INVOICE CANCELLED</h2>
+				</div>
+			</li>
+			<li>
+				<label for="documentSerialNumber">Document Serial Number</label>
+				<span th:text="${invoice.documentSerialNumber}" type="text"></span>
+			</li>
+			<li>
+				<label for="dateExposure">Exposure Date: </label>
+				
+				<span th:text="${invoice.dateExposure}" type="text"></span>
+			</li>
+			<li>
+				<label for="dateExecution">Execution Date: </label>
+				
+				<span th:text="${invoice.dateExecution}" type="text"></span>
+			</li>
+			<li>
+				<label for="symbolVariable">Variable Symbol: </label>
+				
+				<span th:text="${invoice.symbolVariable}" type="text"></span>
+			</li>
+			<li>
+				<label for="symbolConstant">Constant Symbol: </label>
+				
+				<span th:text="${invoice.symbolConstant}" type="text"></span>
+			</li>
+			
+			<li>
+				<label for="supplier">Supplier:</label>
+				
+           		 <span th:text="*{invoice.supplier.name}" type="text"></span>
+			</li>
+			<li>
+			<label for="customer">Customer:</label>
+			
+           		 <span th:text="*{invoice.customer.name}" type="text"></span>
+			</li>
+			
+
+			<li>
+			<label>Items:</label>
 			<br>
-			<p>This page can be seen only by administrator.</p>
-			<p>Please log in as accountant, or ask admin to register your accountant account.</p>
+			<table id="itemTable" th:object="${itemList}">
+				<tr>
+					<th>Name</th>
+					<th>Quantity</th>
+					<th>Price</th>
+					<th>Full Price</th>
+				</tr>
+				
+				<th:block th:each="item , stat : *{items}">
+				
+					<tr>
+					 	
+					 	<td><span th:text="*{items[__${stat.index}__].name}" type="text"></span></td>
+						
+						<td><span th:text="*{items[__${stat.index}__].quantity}" type="text"></span></td>
+						
+						<td><span th:text="*{items[__${stat.index}__].price}" type="text"></span></td>
+						
+						<td><span th:text="*{items[__${stat.index}__].fullPrice}" type="text"></span></td>
+					</tr>
+
+					 	 
+				</th:block>
+				</li>
+				
+				
+			</table>
+			</ul>
+		</form>
+		
+		<div th:text="${message}"></div>
+		</div>
+	</body>
+</html>
+
+<!-- 
+<!DOCTYPE html>
+
+<html
+	xmlns:th="http://www.thymeleaf.org"
+	lang="cs"
+>
+	<head th:replace="fragments/headers :: head(~{::title})">
+		<title>Title</title>
+	</head>
+	<body>
+		<script th:src="@{/JS/addingItems.js}"></script>
+		<nav th:replace="fragments/headers :: nav"></nav>
+		
+		<div class="content">
+		
+		<div sec:authorize="!isAuthenticated()">
+			<h1>Unknown user</h1>
+			<br>
+			<p>You need to be logged in for browsing this page.</p>
+			<p>Please log in, or ask admin to register your account.</p>
 		</div>
 		
-		<div sec:authorize="hasAuthority('ACCOUNTANT')">
-		
+		<div sec:authorize="isAuthenticated()">	
 		<h1>EDIT INVOICE <Label th:text="${invoice.documentSerialNumber}"></Label> </h1>
 		
 		
@@ -124,6 +225,8 @@
 		
 		<div th:text="${message}"></div>
 		</div>
-		</div>
 	</body>
 </html>
+
+
+ -->

@@ -18,4 +18,7 @@ public interface ContactManager{
 
 	void deleteContact(Long id);
 
+	void newContact(String name, String residence, String identificatioNumber, String taxIdentificationNumber,
+			String phone, String email, String bankAcc);
+
 }

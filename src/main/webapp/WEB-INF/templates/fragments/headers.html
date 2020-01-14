@@ -16,9 +16,12 @@
 
 	
 	<body>
+	
 		<nav th:fragment="nav">
+		
 			<div class="topnav" id="myTopnav" th:fragment="nav">
-			  <a th:href="@{/}">Home</a>
+			  <a class="home" id="home" th:href="@{/}">Home</a>
+			  <div sec:authorize="isAuthenticated()">
 			  <div class="dropdown">
 					<button class="dropbtn">Users
 					  <i class="fa fa-caret-down"></i>
@@ -26,6 +29,7 @@
 					<div class="dropdown-content">
 						  <a th:href="@{/userList}">User List</a>
 						  <a th:href="@{/registration}">New User</a>
+						  <a th:href="@{/passwordChange}">Change Password</a>
 					</div>
 			  </div>
 			  <div class="dropdown">
@@ -46,36 +50,19 @@
 					  <a th:href="@{/newInvoice}">New Invoice</a>
 					</div>
 			  </div>
-
+			</div>
 			  <div class="topnav-right">
-			  <span class="logged-user" sec:authentication="name"></span>
+			  <span sec:authorize="isAuthenticated()" class="logged-user" sec:authentication="name"></span>
+			  
 				<a th:href="@{/logout}">Login</a>
 				<a th:href="@{/logout}">Logout</a>
 				<a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
 			  </div>
 
-			</div>
+			
+		</div>
 		</nav>
-
 	</body>
 </html>
 
-<!-- 
-
-<div class="dropdown">
-    <button class="dropbtn">Dropdown 
-      <i class="fa fa-caret-down"></i>
-    </button>
-    <div class="dropdown-content">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-    </div>
-  </div> 
-
- 		<a th:href="@{/userList}">Users</a>
-		  <a th:href="@{/contactList}">Contacts</a>
-		  <a th:href="@{/invoiceList}">Invoices</a> 
-		  
- -->
   

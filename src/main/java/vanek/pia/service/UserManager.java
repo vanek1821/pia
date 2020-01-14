@@ -22,4 +22,6 @@ public interface UserManager {
 
 	boolean addUser(@Valid User userValues);
 
+	int changePassword(String username, String currentPassword, String newPassword, String confirmPassword);
+
 }

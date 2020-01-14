@@ -1,25 +1,4 @@
-/* original
-body, html {
-	margin: 0px;
-}
 
-nav {
-	display: flex;
-	justify-content: space-between;
-}
-
-nav ul li {
-	display: inline-block;
-}
-
-nav a {
-	color: black;
-	font-size: 2em;
-	padding-left: 1em;
-	padding-right: 1em;
-}
- My: */
- 
 body, html {
 	margin: 0px;
 	padding: 0px;
@@ -34,6 +13,11 @@ nav {
 	justify-content: space-between;
 }
 
+.home{
+	background-color: #59b300;
+	font-color: black;
+}
+
 
 /* items in lists */
 .item-name {
@@ -42,6 +26,11 @@ nav {
 }
 .item-control-edit {
 	color: blue;
+	font-size: 14px;
+	text-decoration: none;
+}
+.item-control-view {
+	color: green;
 	font-size: 14px;
 	text-decoration: none;
 }
@@ -89,6 +78,7 @@ nav {
 .form-style-1 input[type=url],
 .form-style-1 input[type=email],
 .form-style-1 input[type=password],
+.stornoButton,
 textarea, 
 select{
 	box-sizing: border-box;
@@ -111,6 +101,7 @@ select{
 .form-style-1 input[type=time]:focus,
 .form-style-1 input[type=url]:focus,
 .form-style-1 input[type=email]:focus,
+.stornoButton:focus,
 .form-style-1 textarea:focus, 
 .form-style-1 select:focus{
 	-moz-box-shadow: 0 0 8px #88D5E9;
@@ -131,7 +122,7 @@ select{
 .form-style-1 .field-textarea{
 	height: 100px;
 }
-.form-style-1 input[type=submit], .form-style-1 input[type=button]{
+.form-style-1 input[type=submit], .form-style-1 input[type=button], .formButton{
 	background: #4B99AD;
 	padding: 8px 15px 8px 15px;
 	border: none;
@@ -140,7 +131,7 @@ select{
 	font-size: 16px;
 	
 }
-.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover{
+.form-style-1 input[type=submit]:hover, .form-style-1 input[type=button]:hover, .formButton:hover{
 	background: #4691A4;
 	box-shadow:none;
 	-moz-box-shadow:none;
@@ -301,4 +292,38 @@ div .error{
 	padding: 14px 16px;
 	text-decoration: none;
 	font-size: 14px;
+}
+
+#home:hover{
+	background-color: #73e600;
+}
+
+#stornoButton{
+	background-color: #ff0000;
+}
+#itemTable {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  
+}
+
+#itemTable td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: center;
+  
+}
+
+#itemTable tr:nth-child(even){background-color: #f2f2f2;}
+
+#itemTable tr:hover {background-color: #ddd;}
+
+#itemTable th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: center;
+  background-color: #4CAF50;
+  color: white;
 }
