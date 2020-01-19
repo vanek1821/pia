@@ -89,13 +89,19 @@
 						
 						<td><span th:text="*{items[__${stat.index}__].quantity}" type="text"></span></td>
 						
-						<td><span th:text="*{items[__${stat.index}__].price}" type="text"></span></td>
+						<td><span th:text="*{items[__${stat.index}__].price}" type="text"></span>,-</td>
 						
-						<td><span th:text="*{items[__${stat.index}__].fullPrice}" type="text"></span></td>
+						<td><span th:text="*{items[__${stat.index}__].fullPrice}" type="text"></span>,-</td>
 					</tr>
 
 					 	 
 				</th:block>
+					<tr>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td><h3><span th:text="${fullPrice}"></span>,-</h3></td>
+					</tr>
 				</li>
 				
 				
