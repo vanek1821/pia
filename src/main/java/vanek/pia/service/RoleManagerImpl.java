@@ -17,12 +17,13 @@ import vanek.pia.domain.Role;
 @Slf4j
 public class RoleManagerImpl implements RoleManager {
 
-	private final RoleRepository roleRepo;
-
 	@Autowired
+	private RoleRepository roleRepo;
+
+	/*@Autowired
 	public RoleManagerImpl(RoleRepository roleRepo) {
 		this.roleRepo = roleRepo;
-	}
+	}*/
 
 	@EventListener(classes = {
 			ContextRefreshedEvent.class

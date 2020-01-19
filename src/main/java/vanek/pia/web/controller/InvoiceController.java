@@ -177,12 +177,15 @@ public class InvoiceController {
 		else {
 			List<Item> invoiceItemList = invoice.getItems();
 			ItemWrapper itemList = new ItemWrapper();
+			int fullPrice = 0;
 			for (Item item : invoiceItemList) {
 				itemList.addItem(item);
+				fullPrice += item.getFullPrice();
 			}
 			modelMap.addAttribute("contacts", contactManager.getContacts());
 			modelMap.addAttribute("invoice", invoice);
 			modelMap.addAttribute("itemList",itemList);
+			modelMap.addAttribute("fullPrice", fullPrice);
 		}
 		
 		return mav;

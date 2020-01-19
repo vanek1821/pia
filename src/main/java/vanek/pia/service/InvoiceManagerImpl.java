@@ -51,7 +51,7 @@ public class InvoiceManagerImpl implements InvoiceManager {
 			throw new IllegalArgumentException("Document already exists!");
 		}
 		Invoice invoice = new Invoice(invoiceValues.getDocumentSerialNumber(), invoiceValues.getDateExposure(), invoiceValues.getDateDue(), invoiceValues.getDateExecution(), invoiceValues.getSymbolVariable(), invoiceValues.getSymbolConstant());
-		System.out.println(invoiceValues.getSupplier());
+		//System.out.println(invoiceValues.getSupplier());
 		Contact supplier = this.contactRepo.findByName(invoiceValues.getSupplier().getName());
 		invoice.setSupplier(supplier);
 		Contact customer = this.contactRepo.findByName(invoiceValues.getCustomer().getName());

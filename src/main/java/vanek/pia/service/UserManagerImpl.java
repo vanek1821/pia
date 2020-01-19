@@ -33,17 +33,19 @@ public class UserManagerImpl implements UserManager, UserDetailsService {
 
 	@Autowired
 	private PasswordEncoder encoder;
-
-	private final UserRepository userRepo;
-	private final RoleRepository roleRepo;
-
 	@Autowired
+	private UserRepository userRepo;
+	@Autowired
+	private RoleRepository roleRepo;
+
+	/*@Autowired
 	public UserManagerImpl(PasswordEncoder encoder, UserRepository userRepo, RoleRepository roleRepo) {
 		this.encoder = encoder;
 		this.userRepo = userRepo;
 		this.roleRepo = roleRepo;
 	}
-
+	 */
+	
 	@Override
 	public List<User> getUsers() {
 		List<User> retVal = new LinkedList<>();

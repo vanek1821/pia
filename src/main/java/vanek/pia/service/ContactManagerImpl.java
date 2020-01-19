@@ -23,7 +23,8 @@ import vanek.pia.domain.User;
 @Slf4j
 public class ContactManagerImpl implements ContactManager {
 
-	private final ContactRepository contactRepo;
+	@Autowired
+	private ContactRepository contactRepo;
 
 	@EventListener(classes = {
 			ContextRefreshedEvent.class
@@ -42,11 +43,11 @@ public class ContactManagerImpl implements ContactManager {
 			this.contactRepo.save(contact);
 		}
 	}
-	
+	/*
 	@Autowired
 	public ContactManagerImpl(ContactRepository contactRepo) {
 		this.contactRepo = contactRepo;
-	}
+	}*/
 
 	@Override
 	public List<Contact> getContacts() {
